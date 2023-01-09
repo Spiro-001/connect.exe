@@ -1,11 +1,31 @@
 .main-groupchatindex {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     align-content: center;
     grid-row: 2;
     grid-column-start: 1;
     grid-column-end: 4;
     border: 1px solid black;
+}
+
+.groupchat-index {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    height: 100%;
+    max-height: 859px;
+    width: 100%;
+    align-items: flex-start;
+    align-content: flex-start;
+    grid-row: 2;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    border: 1px solid black;
+    box-sizing: border-box;
+    overflow: auto;
+    padding: 54px 96px;
+    gap: 48px 54px;
 }

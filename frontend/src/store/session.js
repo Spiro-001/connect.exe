@@ -57,6 +57,7 @@ export const editUser = (payload) => async (dispatch) => {
   } catch (err) {
     const res = err.json();
     if (res.statusCode >= 400) {
+      console.log(2);
       return dispatch(receiveErrors(res.errors));
     }
   }

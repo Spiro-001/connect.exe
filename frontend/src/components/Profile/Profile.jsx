@@ -1,13 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Switch } from "react-router-dom";
 import { ProtectedRoute } from "../Routes/Routes";
-import { clearSessionErrors, editUser } from "../../store/session";
+import { clearSessionErrors, editUser, login } from "../../store/session";
+import { useEffect, useState } from "react";
 
 import "./Profile.css";
-import { useEffect, useState } from "react";
 
 function Profile() {
   const user = useSelector((state) => state.session.user);
+  const errors = useSelector((state) => state.errors.session);
 
   const [username, setUsername] = useState(user ? user.username : "");
   const [email, setEmail] = useState(user ? user.email : "");
@@ -16,29 +17,28 @@ function Profile() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    return () => {
-      dispatch(clearSessionErrors());
-    };
-  }, [dispatch]);
-
   const handleOnSubmitEdit = (e) => {
+    dispatch(clearSessionErrors());
     let email = user.email;
-    setOpenEdit("none");
     setPassword("");
     e.preventDefault();
-    dispatch(
-      editUser({
-        currentUser: {
-          email,
-          password,
-        },
-        editUser: {
-          username,
-          email,
-        },
-      })
-    );
+    dispatch(login({ email, password })).then((res) => {
+      if (res.type === "session/RECEIVE_CURRENT_USER") {
+        dispatch(
+          editUser({
+            currentUser: {
+              email,
+              password,
+            },
+            editUser: {
+              username,
+              email,
+            },
+          })
+        );
+        setOpenEdit("none");
+      }
+    });
   };
 
   return (
@@ -78,6 +78,8 @@ function Profile() {
                   placeholder="passsword"
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                <label>{errors?.email}</label>
+                <label>{errors?.password}</label>
                 <input type="submit" value="edit" />
               </form>
             </div>
