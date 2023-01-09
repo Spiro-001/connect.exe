@@ -14,6 +14,7 @@ import GroupChat from "./components/GroupChat/GroupChat";
 import Profile from "./components/Profile/Profile";
 
 import "./App.css";
+import BottomNav from "./components/BottomNav/BottomNav";
 
 export function App() {
   const [loaded, setLoaded] = useState(false);
@@ -30,11 +31,10 @@ export function App() {
           <AuthRoute exact path="/" component={MainPage} />
           <AuthRoute exact path="/login" component={LoginForm} />
           <AuthRoute exact path="/signup" component={SignupForm} />
-          <div className="main">
-            <ProtectedRoute path="/groupchats" component={GroupChat} />
-            <ProtectedRoute path="/profile" component={Profile} />
-          </div>
+          <ProtectedRoute path="/groupchats" component={GroupChat} />
+          <ProtectedRoute path="/profile" component={Profile} />
         </Switch>
+        <BottomNav />
       </>
     )
   );

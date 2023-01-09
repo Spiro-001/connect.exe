@@ -80,4 +80,25 @@ router.get("/current", restoreUser, (req, res) => {
   });
 });
 
+router.patch("/edit", async (req, res, next) => {
+  const currentUser = req.body.currentUser;
+  const updateUser = req.body.editUser;
+  let selfUser = await res.json(loginUser(currentUser));
+
+  if (selfUser) {
+    const user = await User.findOneAndUpdate(
+      {
+        email: currentUser.email,
+      },
+      updateUser,
+      { returnOriginal: false }
+    );
+    return user;
+  } else {
+    const error = new Error("Invalid credentials");
+    error.statusCode = 400;
+    return next(error);
+  }
+});
+
 module.exports = router;

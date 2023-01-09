@@ -1,14 +1,16 @@
 import { Switch } from "react-router-dom";
 import { ProtectedRoute } from "../Routes/Routes";
+import CreateChat from "./CreateChat/CreateChat";
+import GroupChatIndex from "./GroupChatIndex/GroupChatIndex";
 
 function GroupChat() {
   return (
     <Switch>
       <ProtectedRoute exact path="/groupchats/create">
-        <h1>CREATE</h1>
+        <CreateChat />
       </ProtectedRoute>
       <ProtectedRoute exact path="/groupchats/all">
-        <h1>ALL</h1>
+        <GroupChatIndex />
       </ProtectedRoute>
     </Switch>
   );

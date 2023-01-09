@@ -1,4 +1,4 @@
-.main-profile {
+.main-groupchatindex {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -8,19 +8,4 @@
     grid-column-start: 1;
     grid-column-end: 4;
     border: 1px solid black;
-}
-
-.profile-div {
-    border: 1px solid black;
-    height: 100%;
-    width: 100%;
-}
-
-.edit-div {
-    width: fit-content;
-    border: 1px solid black;
-}
-
-.edit-div:hover {
-    cursor: pointer;
 }

@@ -47,6 +47,21 @@ const startSession = (userInfo, route) => async (dispatch) => {
   }
 };
 
+export const editUser = (payload) => async (dispatch) => {
+  try {
+    const res = await jwtFetch("/api/users/edit", {
+      method: "PATCH",
+      body: JSON.stringify(payload),
+    });
+    return dispatch(receiveCurrentUser(payload.editUser));
+  } catch (err) {
+    const res = err.json();
+    if (res.statusCode >= 400) {
+      return dispatch(receiveErrors(res.errors));
+    }
+  }
+};
+
 export const logout = () => (dispatch) => {
   localStorage.removeItem("jwtToken");
   dispatch(logoutUser());

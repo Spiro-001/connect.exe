@@ -1,0 +1,73 @@
+.main-createchat {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    grid-row: 2;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    border: 1px solid black;
+}
+
+.create-chat {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    border: 1px solid black;
+}
+
+.left-menu {
+    display: flex;
+    height: 100%;
+    width: 0px;
+    min-width: 0px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    border: 1px solid black;
+
+    transition: width 0.2s 0.5s, opacity 0.2s 0s, min-width 0.5s
+}
+
+.left-menu:hover {
+    width: 24px;
+    cursor: pointer;
+}
+
+.chats {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    border: 1px solid black;
+}
+
+.title-groupchat {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid black;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.open-chats {
+    border: 1px solid black;
+    height: 100%;
+    max-height: 822px;
+    width: 100%;
+    overflow: auto;
+}
