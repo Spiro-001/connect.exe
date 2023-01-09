@@ -1,0 +1,58 @@
+.top-nav {
+    display: grid;
+    width: 100%;
+    grid-row: 1;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    grid-template-rows: [first] 54px [last];
+    grid-template-columns: [first] 288px [second] auto [third] 192px [fourth] 288px [last];
+    border-bottom: 1px solid black
+}
+
+.links-auth {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+    grid-row: 1;
+    grid-column: 4;
+    border-left: 1px solid black;
+}
+
+.links-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+    grid-row: 1;
+    grid-column-start: 3;
+    grid-column-end: 5;
+    border-left: 1px solid black;
+}
+
+.nav-button {
+    border: 1px solid black;
+    padding: 6px 12px;
+    white-space: nowrap;
+    text-decoration: none;
+    color: black;
+}
+
+.nav-button:hover {
+    cursor: pointer;
+}
+
+.logo {
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin: 0px;
+    grid-row: 1;
+    grid-column: 1;
+    border-right: 1px solid black;
+}
