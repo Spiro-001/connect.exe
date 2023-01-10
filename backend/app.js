@@ -7,9 +7,13 @@ const debug = require("debug");
 const csurf = require("csurf");
 
 require("./models/User");
+require("./models/Chat");
+require("./models/Message");
 
 const passport = require("passport");
 const usersRouter = require("./routes/api/users");
+const chatsRouter = require("./routes/api/chats");
+const messagesRouter = require("./routes/api/messages");
 const csrfRouter = require("./routes/csrf");
 
 const app = express();
@@ -35,6 +39,8 @@ app.use(
 );
 
 app.use("/api/users", usersRouter);
+app.use("/api/groupchats", chatsRouter);
+app.use("/api/message", messagesRouter);
 app.use("/api/csrf", csrfRouter);
 
 if (isProduction) {

@@ -3,7 +3,8 @@
     box-sizing: border-box;
     padding: 4px 12px;
     border-radius: 6px;
-    width: fit-content;
+    text-align: center;
+    width: 108px;
 }
 
 .username {

@@ -5,7 +5,6 @@ import GroupChatIndex from "./GroupChatIndex/GroupChatIndex";
 import GroupChatShow from "./GroupChatShow/GroupChatShow";
 
 function GroupChat({ theme }) {
-  console.log(theme);
   return (
     <Switch>
       <ProtectedRoute exact path="/groupchats/create">

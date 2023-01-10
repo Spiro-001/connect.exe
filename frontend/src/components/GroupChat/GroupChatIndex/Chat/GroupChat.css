@@ -15,6 +15,10 @@
     text-decoration: none;
 }
 
+.group-chat:link {
+    color: var(--text-div)
+}
+
 .group-chat:visited {
     color: var(--div-text);
 }

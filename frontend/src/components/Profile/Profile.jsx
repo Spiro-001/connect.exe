@@ -8,8 +8,6 @@ import "./Profile.css";
 import "./ProfileBadge.css";
 
 function Profile({ theme, setTheme }) {
-  console.log(theme);
-
   const switchTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
@@ -55,51 +53,85 @@ function Profile({ theme, setTheme }) {
         <div className="main-profile" data-theme={theme}>
           <div className="profile-div">
             <div className="user-info">
+              <h2>Profile</h2>
+              <label>{errors?.email}</label>
+              <label>{errors?.password}</label>
               <div className="profile-username">
                 <div className="badge-profile username">Username</div>
-                <span id="username">{user.username}</span>
-              </div>
-              <div className="profile-email">
-                <div className="badge-profile email">Email</div>
-                <span id="email">{user.email}</span>
-              </div>
-              <div
-                className="edit-div"
-                onClick={(e) =>
-                  openEdit === "none"
-                    ? setOpenEdit("flex")
-                    : setOpenEdit("none")
-                }
-              >
-                Edit
-              </div>
-              <form onSubmit={handleOnSubmitEdit} style={{ display: openEdit }}>
+                <span
+                  id="username"
+                  style={{ display: openEdit === "none" ? "block" : "none" }}
+                >
+                  {user.username}
+                </span>
                 <input
+                  className="profile-edit-input"
+                  style={{ display: openEdit === "none" ? "none" : "block" }}
                   type="text"
                   value={username}
                   placeholder="username"
                   onChange={(e) => setUsername(e.target.value)}
                 />
+              </div>
+              <div className="profile-email">
+                <div className="badge-profile email">Email</div>
+                <span
+                  id="email"
+                  style={{ display: openEdit === "none" ? "block" : "none" }}
+                >
+                  {user.email}
+                </span>
                 <input
+                  className="profile-edit-input"
+                  style={{ display: openEdit === "none" ? "none" : "block" }}
                   type="email"
                   value={email}
                   placeholder="email"
                   onChange={(e) => setEmail(e.target.value)}
+                  disabled
                 />
+              </div>
+              <div className="profile-password">
+                <div className="badge-profile email">Password</div>
+                <span
+                  id="email"
+                  style={{ display: openEdit === "none" ? "block" : "none" }}
+                >
+                  ●●●●●●●●
+                </span>
                 <input
+                  className="profile-edit-input"
+                  style={{ display: openEdit === "none" ? "none" : "block" }}
                   type="password"
                   value={password}
                   placeholder="passsword"
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <label>{errors?.email}</label>
-                <label>{errors?.password}</label>
-                <input type="submit" value="edit" />
-              </form>
-              <button onClick={switchTheme}>
-                Switch to {theme === "light" ? "dark" : "light"} Theme
+              </div>
+              <button
+                className="edit-button-profile"
+                style={{ display: openEdit === "none" ? "none" : "block" }}
+                onClick={handleOnSubmitEdit}
+              >
+                Confirm
               </button>
+              <div className="edit-div">
+                <div
+                  className="edit-button"
+                  onClick={(e) => {
+                    dispatch(clearSessionErrors());
+                    openEdit === "none"
+                      ? setOpenEdit("flex")
+                      : setOpenEdit("none");
+                  }}
+                >
+                  Edit
+                </div>
+              </div>
             </div>
+            <button className="switch-theme-button" onClick={switchTheme}>
+              {theme === "light" ? "Dark" : "Light"} Theme
+            </button>
           </div>
         </div>
       </ProtectedRoute>

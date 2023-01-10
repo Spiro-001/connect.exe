@@ -67,15 +67,19 @@
     align-content: center;
 }
 
-
 .input-sendmessage {
     box-sizing: border-box;
     padding: 12px 24px;
     font-size: 14px;
     height: 100%;
     width: 100%;
+    border: 0;
     background-color: var(--background);
-    color: (--text-primary)
+    color: var(--text-primary)
+}
+
+.input-sendmessage:hover {
+    cursor: pointer;
 }
 
 ::placeholder {
@@ -84,12 +88,11 @@
 
 .top-start-chat {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
     align-content: center;
     align-items: center;
     font-size: 14px;
-    padding: 12px 24px;
     box-sizing: border-box;
     color: rgba(0,0,0,0.6);
     border: 1px solid var(--border-primary);
