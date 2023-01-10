@@ -18,12 +18,16 @@ import BottomNav from "./components/BottomNav/BottomNav";
 
 import useLocalStorage from "use-local-storage";
 
+import { io } from "socket.io-client";
+
 export function App() {
   const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [theme, setTheme] = useLocalStorage(
     "theme",
     defaultDark ? "dark" : "light"
   );
+
+  const socket = io();
 
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();

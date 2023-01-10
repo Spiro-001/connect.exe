@@ -10,7 +10,7 @@ function ChatLog({ userId, chatLog }) {
         previousAuthor.push(message.author);
         if (message.author === userId) {
           return (
-            <div className="message">
+            <div className="message" key={message._id}>
               {previousAuthor[previousAuthor.length - 2] !== message.author && (
                 <span className="self-username">{message.authorName}</span>
               )}
@@ -19,7 +19,7 @@ function ChatLog({ userId, chatLog }) {
           );
         } else {
           return (
-            <div className="message">
+            <div className="message" key={message._id}>
               {previousAuthor[previousAuthor.length - 2] !== message.author && (
                 <span className="other-username">{message.authorName}</span>
               )}

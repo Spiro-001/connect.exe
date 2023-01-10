@@ -69,7 +69,7 @@ function GroupChatShow({ theme }) {
               {chat.ownerUsername}
             </span>
           </div>
-          <ChatLog chatLog={chatLog} id={id} userId={user._id} />
+          <ChatLog chatLog={chatLog} id={id} userId={user._id} key={id} />
           <div className="bottom-chat-box">
             <input
               value={body}
