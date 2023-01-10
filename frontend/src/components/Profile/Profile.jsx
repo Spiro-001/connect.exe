@@ -5,8 +5,16 @@ import { clearSessionErrors, editUser, login } from "../../store/session";
 import { useEffect, useState } from "react";
 
 import "./Profile.css";
+import "./ProfileBadge.css";
 
-function Profile() {
+function Profile({ theme, setTheme }) {
+  console.log(theme);
+
+  const switchTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  };
+
   const user = useSelector((state) => state.session.user);
   const errors = useSelector((state) => state.errors.session);
 
@@ -44,11 +52,17 @@ function Profile() {
   return (
     <Switch>
       <ProtectedRoute exact path="/profile">
-        <div className="main-profile">
+        <div className="main-profile" data-theme={theme}>
           <div className="profile-div">
             <div className="user-info">
-              <h1>{user.username}</h1>
-              <h1>{user.email}</h1>
+              <div className="profile-username">
+                <div className="badge-profile username">Username</div>
+                <span id="username">{user.username}</span>
+              </div>
+              <div className="profile-email">
+                <div className="badge-profile email">Email</div>
+                <span id="email">{user.email}</span>
+              </div>
               <div
                 className="edit-div"
                 onClick={(e) =>
@@ -82,6 +96,9 @@ function Profile() {
                 <label>{errors?.password}</label>
                 <input type="submit" value="edit" />
               </form>
+              <button onClick={switchTheme}>
+                Switch to {theme === "light" ? "dark" : "light"} Theme
+              </button>
             </div>
           </div>
         </div>

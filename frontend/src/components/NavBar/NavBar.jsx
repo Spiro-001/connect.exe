@@ -1,9 +1,11 @@
 import { Link, Redirect, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import "./NavBar.css";
 import { logout } from "../../store/session";
 
-function NavBar() {
+import "./NavBar.css";
+import "../Profile/Profile";
+
+function NavBar({ theme }) {
   const loggedIn = useSelector((state) => !!state.session.user);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -47,7 +49,7 @@ function NavBar() {
   };
 
   return (
-    <div className="top-nav">
+    <div className="top-nav" data-theme={theme}>
       <h1 className="logo">Team Talk</h1>
       {getLinks()}
     </div>

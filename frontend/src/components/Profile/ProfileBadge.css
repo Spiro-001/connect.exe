@@ -1,8 +1,19 @@
-.badge {
+.badge-profile {
     border: 1px solid var(--border-super-light);
     box-sizing: border-box;
     padding: 4px 12px;
     border-radius: 6px;
+    width: fit-content;
+}
+
+.username {
+    background-color: var(--description-badge);
+    color: var(--text-primary);
+}
+
+.email {
+    background-color: var(--description-badge);
+    color: var(--text-primary);
 }
 
 .mini {

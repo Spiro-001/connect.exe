@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import "./SessionForm.css";
 import { signup, clearSessionErrors } from "../../store/session";
 
-function SignupForm() {
+import "./SessionForm.css";
+import "../Profile/Profile.css";
+
+function SignupForm({ theme }) {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -52,7 +54,7 @@ function SignupForm() {
   };
 
   return (
-    <div className="session-container">
+    <div className="session-container" data-theme={theme}>
       <form className="session-form" onSubmit={usernameSubmit}>
         <h2>Sign Up Form</h2>
         <div className="email-section">

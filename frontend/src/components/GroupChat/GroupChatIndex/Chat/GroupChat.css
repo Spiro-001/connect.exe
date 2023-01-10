@@ -1,5 +1,5 @@
 .group-chat {
-    border: 1px solid black;
+    border: 1px solid var(--border-primary);
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -11,6 +11,12 @@
     box-sizing: border-box;
     border-radius: 10px;
     gap: 12px 0px;
+    background-color: var(--main-div);
+    text-decoration: none;
+}
+
+.group-chat:visited {
+    color: var(--div-text);
 }
 
 .group-chat:hover {
@@ -33,7 +39,7 @@
 }
 
 .group-chat-name {
-    border: 1px solid black;
+    border: 1px solid var(--border-div);
     padding: 8px 24px;
     width: 90%;
     box-sizing: border-box;

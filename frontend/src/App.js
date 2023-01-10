@@ -16,7 +16,15 @@ import Profile from "./components/Profile/Profile";
 import "./App.css";
 import BottomNav from "./components/BottomNav/BottomNav";
 
+import useLocalStorage from "use-local-storage";
+
 export function App() {
+  const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [theme, setTheme] = useLocalStorage(
+    "theme",
+    defaultDark ? "dark" : "light"
+  );
+
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -26,15 +34,29 @@ export function App() {
   return (
     loaded && (
       <>
-        <NavBar />
+        <NavBar theme={theme} />
         <Switch>
-          <AuthRoute exact path="/" component={MainPage} />
-          <AuthRoute exact path="/login" component={LoginForm} />
-          <AuthRoute exact path="/signup" component={SignupForm} />
-          <ProtectedRoute path="/groupchats" component={GroupChat} />
-          <ProtectedRoute path="/profile" component={Profile} />
+          <AuthRoute exact path="/" component={MainPage} theme={theme} />
+          <AuthRoute exact path="/login" component={LoginForm} theme={theme} />
+          <AuthRoute
+            exact
+            path="/signup"
+            component={SignupForm}
+            theme={theme}
+          />
+          <ProtectedRoute
+            path="/groupchats"
+            component={GroupChat}
+            theme={theme}
+          />
+          <ProtectedRoute
+            path="/profile"
+            component={Profile}
+            theme={theme}
+            setTheme={setTheme}
+          />
         </Switch>
-        <BottomNav />
+        <BottomNav theme={theme} />
       </>
     )
   );

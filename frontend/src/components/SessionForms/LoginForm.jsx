@@ -4,7 +4,7 @@ import "./SessionForm.css";
 
 import { login, clearSessionErrors } from "../../store/session";
 
-function LoginForm() {
+function LoginForm({ theme }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const errors = useSelector((state) => state.errors.session);
@@ -27,7 +27,7 @@ function LoginForm() {
   };
 
   return (
-    <div className="session-container">
+    <div className="session-container" data-theme={theme}>
       <form className="session-form" onSubmit={handleSubmit}>
         <h2>Log In Form</h2>
         <div className="email-section">

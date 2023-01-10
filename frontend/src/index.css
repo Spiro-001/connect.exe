@@ -1,7 +1,7 @@
 html {
   display: flex;
   height: 100%;
-  border: 1px solid black;
+  border: 1px solid var(--border-primary);
   overflow: hidden;
 }
 

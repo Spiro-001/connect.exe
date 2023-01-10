@@ -1,12 +1,13 @@
 import { useState } from "react";
 import Chat from "./Chat/Chat";
 import "./CreateChat.css";
+import "../../Profile/Profile";
 
-function CreateChat() {
+function CreateChat({ theme }) {
   const [openLeftMenu, setOpenLeftMenu] = useState(0);
 
   return (
-    <div className="main-createchat">
+    <div className="main-createchat" data-theme={theme}>
       <div className="create-chat">
         <div
           className="left-menu"

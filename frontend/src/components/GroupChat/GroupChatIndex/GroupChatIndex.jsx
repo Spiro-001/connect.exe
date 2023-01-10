@@ -1,19 +1,11 @@
 import GroupChat from "./Chat/GroupChat";
 import "./GroupChatIndex.css";
+import "../../Profile/Profile";
 
-function GroupChatIndex() {
+function GroupChatIndex({ theme }) {
   return (
-    <div className="main-groupchatindex">
+    <div className="main-groupchatindex" data-theme={theme}>
       <div className="groupchat-index">
-        <GroupChat />
-        <GroupChat />
-        <GroupChat />
-        <GroupChat />
-        <GroupChat />
-        <GroupChat />
-        <GroupChat />
-        <GroupChat />
-        <GroupChat />
         <GroupChat />
       </div>
     </div>

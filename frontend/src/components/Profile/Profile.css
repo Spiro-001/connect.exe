@@ -7,20 +7,60 @@
     grid-row: 2;
     grid-column-start: 1;
     grid-column-end: 4;
-    border: 1px solid black;
+    border: 1px solid var(--border-primary);
+    background-color: var(--background);
+    color: var(--text-primary);
 }
 
 .profile-div {
-    border: 1px solid black;
+    border: 1px solid var(--border-primary);
+    padding: 54px 96px;
+    box-sizing: border-box;
     height: 100%;
     width: 100%;
 }
 
 .edit-div {
     width: fit-content;
-    border: 1px solid black;
+    border: 1px solid var(--border-primary);
 }
 
 .edit-div:hover {
     cursor: pointer;
+}
+
+.profile-username {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.profile-email {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+[data-theme='light'] {
+    --background: white;
+    --main-div: white;
+    --text-primary: black;
+    --text-div: black;
+    --light-text: rgba(0,0,0,0.6);
+    --border-primary: black;
+    --border-div: black;
+    --border-super-light: rgba(0,0,0,0.1);
+    --description-badge: rgb(155, 255, 222);
+}
+
+[data-theme='dark'] {
+    --background: black;
+    --main-div: white;
+    --text-primary: white;
+    --text-div: black;
+    --light-text: white;
+    --border-primary: white;
+    --border-div: black;
+    --border-super-light: white;
+    --description-badge: rgb(149, 56, 255);
 }

@@ -1,7 +1,12 @@
 import "./BottomNav.css";
+import "../Profile/Profile";
 
-function BottomNav() {
-  return <div className="bottom-nav">BOTTOM</div>;
+function BottomNav({ theme }) {
+  return (
+    <div className="bottom-nav" data-theme={theme}>
+      BOTTOM
+    </div>
+  );
 }
 
 export default BottomNav;
