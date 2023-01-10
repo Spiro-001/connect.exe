@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Chat from "./Chat/Chat";
 import "./CreateChat.css";
-import "../../Profile/Profile";
+import "../../Profile/Profile.css";
 import { useSelector } from "react-redux";
 import { jwtFetch } from "../../../store/jwt";
 import { useHistory } from "react-router-dom";

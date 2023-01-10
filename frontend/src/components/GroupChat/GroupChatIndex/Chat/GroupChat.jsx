@@ -1,6 +1,6 @@
 import "./GroupChat.css";
 import "./GroupChatBadge.css";
-import "../../../Profile/Profile";
+import "../../../Profile/Profile.css";
 import { Link } from "react-router-dom";
 
 function GroupChat({ chatData }) {

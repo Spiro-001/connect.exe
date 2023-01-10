@@ -1,6 +1,6 @@
 import GroupChat from "./Chat/GroupChat";
 import "./GroupChatIndex.css";
-import "../../Profile/Profile";
+import "../../Profile/Profile.css";
 import { useEffect, useState } from "react";
 
 function GroupChatIndex({ theme }) {

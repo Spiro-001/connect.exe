@@ -1,5 +1,5 @@
 import "./BottomNav.css";
-import "../Profile/Profile";
+import "../Profile/Profile.css";
 
 function BottomNav({ theme }) {
   return (

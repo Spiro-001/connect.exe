@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../store/session";
 
 import "./NavBar.css";
-import "../Profile/Profile";
+import "../Profile/Profile.css";
 
 function NavBar({ theme }) {
   const loggedIn = useSelector((state) => !!state.session.user);

@@ -1,0 +1,35 @@
+.users-in-chat {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    width: 288px;
+    min-width: 288px;
+    border: 1px solid var(--border-primary);
+    color: var(--text-primary);
+}
+
+.active-users-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 81px;
+    width: 100%;
+    margin: 0px;
+    border: 1px solid var(--border-primary);
+}
+
+.active-user-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin: 0px;
+    list-style: none;
+    padding: 24px 6px;
+    gap: 12px;
+}

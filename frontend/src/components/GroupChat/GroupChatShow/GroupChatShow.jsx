@@ -1,12 +1,13 @@
 import "./GroupChatShow.css";
 import "./GroupChatShowBadge.css";
+import "../../Profile/Profile.css";
 
-import "../../Profile/Profile";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ChatLog from "./ChatLog/ChatLog";
 import { jwtFetch } from "../../../store/jwt";
 import { useSelector } from "react-redux";
+import ActiveUsers from "./ActiveUsers/ActiveUsers";
 
 function GroupChatShow({ theme }) {
   const [chat, setChat] = useState({});
@@ -81,7 +82,7 @@ function GroupChatShow({ theme }) {
             </button>
           </div>
         </div>
-        <div className="users-in-chat">user-1</div>
+        <ActiveUsers />
       </div>
     </div>
   );

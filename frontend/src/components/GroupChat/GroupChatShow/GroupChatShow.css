@@ -25,11 +25,6 @@
     border: 1px solid var(--border-primary);
 }
 
-.users-in-chat {
-    width: 288px;
-    border: 1px solid var(--border-primary);
-}
-
 .top-chat-box {
     display: flex;
     justify-content: flex-start;

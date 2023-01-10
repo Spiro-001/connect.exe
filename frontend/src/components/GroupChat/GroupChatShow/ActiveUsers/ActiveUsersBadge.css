@@ -1,0 +1,8 @@
+.badge-active-user {
+    border: 1px solid var(--border-primary);
+    box-sizing: border-box;
+    padding: 4px 18px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
