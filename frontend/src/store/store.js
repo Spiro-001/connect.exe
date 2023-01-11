@@ -1,11 +1,13 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
+import { chatReducer } from "./chats";
 import { errorReducer } from "./errors";
 import { sessionReducer } from "./session";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   errors: errorReducer,
+  chats: chatReducer,
 });
 
 let enhancer;

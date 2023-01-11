@@ -4,26 +4,51 @@ import "../../Profile/Profile.css";
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ChatLog from "./ChatLog/ChatLog";
-import { jwtFetch } from "../../../store/jwt";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ActiveUsers from "./ActiveUsers/ActiveUsers";
+import ChatLog from "./ChatLog/ChatLog";
+import { addChat, leaveChat } from "../../../store/chats";
 
-function GroupChatShow({ theme }) {
+function GroupChatShow({ theme, socket }) {
   const [chat, setChat] = useState({});
   const [body, setBody] = useState("");
+  const [activeUsers, setActiveUsers] = useState([]);
   const [chatLog, setChatLog] = useState([]);
+  const user = useSelector((state) => state.session.user);
+  const chatId = useSelector((state) => state.chats.chatId);
+  const dispatch = useDispatch();
   const { id } = useParams();
+
+  useEffect(() => {
+    socket.on("return", () => {
+      console.log("recieved");
+    });
+  }, []);
+
+  useEffect(() => {
+    console.log(id, chatId);
+    if (id !== chatId) {
+      socket.emit("chat-leave", { userId: user.username, chatroomId: chatId });
+      dispatch(leaveChat());
+    }
+    socket.emit("chat-join", { userId: user.username, chatroomId: id });
+    dispatch(addChat(id));
+  }, []);
+
+  useEffect(() => {
+    socket.on("user-join", (payload) => {
+      setActiveUsers(payload);
+    });
+    socket.on("user-leave", (payload) => {
+      setActiveUsers(payload);
+    });
+  }, []);
 
   useEffect(() => {
     fetch(`/api/message/${id}`)
       .then((res) => res.json())
       .then((chatLog) => setChatLog(chatLog));
-  }, []);
 
-  const user = useSelector((state) => state.session.user);
-
-  useEffect(() => {
     fetch(`/api/groupchats/${id}`)
       .then((res) => res.json())
       .then((data) => setChat(data));
@@ -31,19 +56,20 @@ function GroupChatShow({ theme }) {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    jwtFetch(`/api/message/create/${id}`, {
-      method: "POST",
-      body: JSON.stringify({
-        author: user._id,
-        authorName: user.username,
-        body,
-      }),
-    })
-      .then((res) => res.json())
-      .then((chat) => {
-        setBody("");
-        setChatLog([...chatLog, chat]);
-      });
+    socket.emit("test");
+    // jwtFetch(`/api/message/create/${id}`, {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     author: user._id,
+    //     authorName: user.username,
+    //     body,
+    //   }),
+    // })
+    //   .then((res) => res.json())
+    //   .then((chat) => {
+    //     setBody("");
+    //     setChatLog([...chatLog, chat]);
+    //   });
   };
 
   return (
@@ -82,7 +108,7 @@ function GroupChatShow({ theme }) {
             </button>
           </div>
         </div>
-        <ActiveUsers />
+        <ActiveUsers activeUsers={activeUsers[chatId]} chatId={chatId} />
       </div>
     </div>
   );

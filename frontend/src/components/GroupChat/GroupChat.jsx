@@ -4,7 +4,7 @@ import CreateChat from "./CreateChat/CreateChat";
 import GroupChatIndex from "./GroupChatIndex/GroupChatIndex";
 import GroupChatShow from "./GroupChatShow/GroupChatShow";
 
-function GroupChat({ theme }) {
+function GroupChat({ theme, socket }) {
   return (
     <Switch>
       <ProtectedRoute exact path="/groupchats/create">
@@ -14,7 +14,7 @@ function GroupChat({ theme }) {
         <GroupChatIndex theme={theme} />
       </ProtectedRoute>
       <ProtectedRoute exact path={"/groupchats/:id"}>
-        <GroupChatShow theme={theme} />
+        <GroupChatShow theme={theme} socket={socket} />
       </ProtectedRoute>
     </Switch>
   );

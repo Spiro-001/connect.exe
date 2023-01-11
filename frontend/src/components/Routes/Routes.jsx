@@ -7,6 +7,7 @@ export const AuthRoute = ({
   exact,
   theme,
   setTheme,
+  socket,
 }) => {
   const loggedIn = useSelector((state) => !!state.session.user);
 
@@ -29,6 +30,7 @@ export const ProtectedRoute = ({
   component: Component,
   theme,
   setTheme,
+  socket,
   ...rest
 }) => {
   const loggedIn = useSelector((state) => !!state.session.user);
@@ -38,7 +40,12 @@ export const ProtectedRoute = ({
       {...rest}
       render={(props) =>
         loggedIn ? (
-          <Component {...props} theme={theme} setTheme={setTheme} />
+          <Component
+            {...props}
+            theme={theme}
+            setTheme={setTheme}
+            socket={socket}
+          />
         ) : (
           <Redirect to="/login" />
         )

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Switch } from "react-router-dom";
+import { Switch, useHistory } from "react-router-dom";
 import { ProtectedRoute } from "../Routes/Routes";
 import { clearSessionErrors, editUser, login } from "../../store/session";
 import { useEffect, useState } from "react";
@@ -7,12 +7,7 @@ import { useEffect, useState } from "react";
 import "./Profile.css";
 import "./ProfileBadge.css";
 
-function Profile({ theme, setTheme }) {
-  const switchTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-  };
-
+function Profile({ theme, setTheme, socket }) {
   const user = useSelector((state) => state.session.user);
   const errors = useSelector((state) => state.errors.session);
 
@@ -21,7 +16,18 @@ function Profile({ theme, setTheme }) {
   const [password, setPassword] = useState("");
   const [openEdit, setOpenEdit] = useState("none");
 
+  const history = useHistory();
+
+  // useEffect(() => {
+  //   socket.emit("chat-leave", { userId: user._id });
+  // }, []);
+
   const dispatch = useDispatch();
+
+  const switchTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+  };
 
   const handleOnSubmitEdit = (e) => {
     dispatch(clearSessionErrors());

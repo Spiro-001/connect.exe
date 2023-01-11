@@ -21,7 +21,51 @@ app.set("port", port);
  */
 
 const server = http.createServer(app);
+
 const io = require("socket.io")(server);
+
+const activeUser = {};
+io.on("connection", (socket) => {
+  console.log("connected");
+  socket.emit("connection", null);
+
+  socket.on("test", () => {
+    socket.emit("return");
+    socket.broadcast.emit("return");
+  });
+
+  socket.on("chat-join", (payload) => {
+    console.log("user joined chat");
+    if (activeUser[payload.chatroomId]) {
+      if (!activeUser[payload.chatroomId].includes(payload.userId)) {
+        activeUser[payload.chatroomId].push(payload.userId);
+      }
+    } else {
+      activeUser[payload.chatroomId] = [payload.userId];
+    }
+    console.log(activeUser, activeUser[payload.chatroomId]);
+    socket.emit("user-join", activeUser);
+    socket.broadcast.emit("user-join", activeUser);
+    // callback(activeUser[payload.chatroomId]);
+  });
+
+  socket.on("chat-leave", (payload) => {
+    if (activeUser[payload.chatroomId]) {
+      console.log("user left chat");
+      let removeUserIndex = activeUser[payload.chatroomId].indexOf(
+        payload.userId
+      );
+      console.log(removeUserIndex);
+      if (removeUserIndex != -1) {
+        activeUser[payload.chatroomId].splice(removeUserIndex, 1);
+      }
+    }
+    console.log(activeUser, activeUser[payload.chatroomId]);
+    socket.emit("user-leave", activeUser);
+    socket.broadcast.emit("user-leave", activeUser);
+    // callback(activeUser[payload.chatroomId]);
+  });
+});
 
 /**
  * Listen on provided port, on all network interfaces.
