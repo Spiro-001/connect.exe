@@ -58,7 +58,9 @@ function CreateChat({ theme }) {
           </div>
           <div className="open-chats">
             {allChat?.map((chatData) => {
-              return <Chat chatData={chatData} key={chatData._id} />;
+              if (chatData.owner === user._id) {
+                return <Chat chatData={chatData} key={chatData._id} />;
+              }
             })}
           </div>
         </div>

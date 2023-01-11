@@ -2,17 +2,27 @@ import "./GroupChatShow.css";
 import "./GroupChatShowBadge.css";
 import "../../Profile/Profile.css";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addChat, leaveChat } from "../../../store/chats";
 import { jwtFetch } from "../../../store/jwt";
+import { ReactComponent as Edit } from "./SVG/pencil-edit-button-svgrepo-com.svg";
+
 import ActiveUsers from "./ActiveUsers/ActiveUsers";
 import ChatLog from "./ChatLog/ChatLog";
 
 function GroupChatShow({ theme, socket }) {
   const [chat, setChat] = useState({});
   const [body, setBody] = useState("");
+
+  const [editTitle, setEditTitle] = useState(false);
+  const [editDescription, setEditDescription] = useState(false);
+  const [editTitleValue, setEditTitleValue] = useState(chat.title);
+  const [editDescriptionValue, setEditDescriptionValue] = useState(
+    chat.description
+  );
+
   const [activeUsers, setActiveUsers] = useState([]);
   const [chatLog, setChatLog] = useState([]);
   const user = useSelector((state) => state.session.user);
@@ -22,7 +32,6 @@ function GroupChatShow({ theme, socket }) {
 
   useEffect(() => {
     socket.on("return", () => {
-      console.log("recieved");
       fetch(`/api/message/${id}`)
         .then((res) => res.json())
         .then((chatLog) => setChatLog(chatLog));
@@ -77,6 +86,42 @@ function GroupChatShow({ theme, socket }) {
     }
   };
 
+  const handleOnSubmitEditTitle = (e) => {
+    e.preventDefault();
+    jwtFetch(`/api/groupchats/edit/${chatId}`, {
+      method: "PATCH",
+      body: JSON.stringify({
+        title: editTitleValue,
+        description: editDescriptionValue,
+      }),
+    })
+      .then((res) => res.json)
+      .then((data) => {
+        chat.title = editTitleValue;
+        chat.description = editDescriptionValue;
+        setEditTitle(false);
+        setEditDescription(false);
+      });
+  };
+
+  const handleOnSubmitEditDescription = (e) => {
+    e.preventDefault();
+    jwtFetch(`/api/groupchats/edit/${chatId}`, {
+      method: "PATCH",
+      body: JSON.stringify({
+        title: editTitleValue,
+        description: editDescriptionValue,
+      }),
+    })
+      .then((res) => res.json)
+      .then((data) => {
+        chat.title = editTitleValue;
+        chat.description = editDescriptionValue;
+        setEditTitle(false);
+        setEditDescription(false);
+      });
+  };
+
   return (
     <div className="groupchat-main-show" data-theme={theme}>
       <div className="groupchat-show">
@@ -89,11 +134,63 @@ function GroupChatShow({ theme, socket }) {
             />
             <span>
               <div className="badge-group-show title">Title</div>
-              {chat.title}
+              {editTitle && (
+                <form
+                  className="form-edit-chat-info"
+                  onSubmit={handleOnSubmitEditTitle}
+                >
+                  <input
+                    className="edit-input"
+                    value={editTitleValue}
+                    onChange={(e) => setEditTitleValue(e.target.value)}
+                  />
+                  <button className="confirm-edit" type="submit">
+                    Save
+                  </button>
+                </form>
+              )}
+              {!editTitle && chat.title}
+              <div
+                className="edit-icon"
+                onClick={(e) => {
+                  setEditTitleValue(chat.title);
+                  setEditDescriptionValue(chat.description);
+                  setEditTitle(editTitle ? false : true);
+                }}
+              >
+                {!editTitle && (
+                  <Edit height="20px" width="20px" className="edit-icon" />
+                )}
+              </div>
             </span>
             <span>
               <div className="badge-group-show description">Description</div>
-              {chat.description}
+              {editDescription && (
+                <form
+                  className="form-edit-chat-info"
+                  onSubmit={handleOnSubmitEditDescription}
+                >
+                  <input
+                    className="edit-input"
+                    value={editDescriptionValue}
+                    onChange={(e) => setEditDescriptionValue(e.target.value)}
+                  />
+                  <button className="confirm-edit" type="submit">
+                    Save
+                  </button>
+                </form>
+              )}
+              {!editDescription && chat.description}
+              <div
+                className="edit-icon"
+                onClick={(e) => {
+                  setEditTitleValue(chat.title);
+                  setEditDescriptionValue(chat.description);
+                  setEditDescription(editDescription ? false : true);
+                }}
+              >
+                {!editDescription && <Edit height="20px" width="20px" />}
+              </div>
             </span>
             <span>
               <div className="badge-group-show owner">Owner</div>
@@ -101,17 +198,17 @@ function GroupChatShow({ theme, socket }) {
             </span>
           </div>
           <ChatLog chatLog={chatLog} id={id} userId={user._id} key={id} />
-          <div className="bottom-chat-box">
+          <form className="bottom-chat-box" onSubmit={handleOnSubmit}>
             <input
               value={body}
               onChange={(e) => setBody(e.target.value)}
               className="send-message-input"
               placeholder="Send a message..."
             />
-            <button onClick={handleOnSubmit} className="send-button">
+            <button type="submit" className="send-button">
               Send
             </button>
-          </div>
+          </form>
         </div>
         <ActiveUsers activeUsers={activeUsers[chatId]} chatId={chatId} />
       </div>

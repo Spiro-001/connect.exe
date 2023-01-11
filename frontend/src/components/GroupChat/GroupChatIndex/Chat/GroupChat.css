@@ -1,4 +1,9 @@
+.group-chat-container {
+    position: relative;
+}
+
 .group-chat {
+    position: relative;
     border: 1px solid var(--border-primary);
     display: flex;
     flex-direction: column;
@@ -13,6 +18,63 @@
     gap: 12px 0px;
     background-color: var(--main-div);
     text-decoration: none;
+}
+
+.confirm-delete-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 12px 24px;
+    position: absolute;
+    box-sizing: border-box;
+    height: 108px;
+    width: 384px;
+    top:calc(50% - 54px);
+    left: calc(50% - 192px);
+    border-radius: 10px;
+    border: 1px solid var(--border-primary);
+    z-index: 3;
+}
+
+.edit-icon:hover {
+    cursor: pointer;
+}
+
+#warning {
+    margin: 0px;
+}
+
+.options-confirm {
+    display: flex;
+    gap: 0px 6px;
+    margin-left: auto;
+}
+
+.confirm-delete-modal span#yes {
+    width: fit-content;
+    padding: 2px 12px;
+    border: 1px solid var(--border-primary);
+}
+
+.confirm-delete-modal span#no {
+    width: fit-content;
+    padding: 2px 12px;
+    border: 1px solid var(--border-primary);
+}
+
+.confirm-delete-modal span:hover {
+    cursor: pointer;
+}
+
+.delete-groupchat {
+    position: absolute;
+    top: 0px;
+    right: 6px;
+    z-index: 2;
+}
+
+.delete-groupchat:hover {
+    cursor: pointer;
 }
 
 .group-chat:link {

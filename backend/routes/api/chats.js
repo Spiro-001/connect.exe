@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
+const Message = require("../../models/Message");
 const Chat = mongoose.model("Chat");
 
 router.get("/", (_req, res, _next) => {
@@ -41,6 +42,38 @@ router.get("/:id", async (req, res, next) => {
       _id: mongoose.Types.ObjectId(req.params.id),
     });
     return res.json(chat);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.patch("/edit/:id", async (req, res, next) => {
+  try {
+    const editChat = await Chat.findByIdAndUpdate(
+      { _id: req.params.id },
+      { title: req.body.title, description: req.body.description }
+    );
+    return res.json(editChat);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete("/delete/:id", async (req, res, next) => {
+  try {
+    Message.deleteMany({ chat: req.params.id }, (err, message) => {
+      if (err) {
+        next(err);
+      } else {
+        Chat.findOneAndDelete({ _id: req.params.id }, (err, chat) => {
+          if (err) {
+            next(err);
+          } else {
+            return res.json({ chat, message });
+          }
+        });
+      }
+    });
   } catch (err) {
     next(err);
   }
