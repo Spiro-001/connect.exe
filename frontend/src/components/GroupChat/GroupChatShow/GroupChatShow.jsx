@@ -5,9 +5,10 @@ import "../../Profile/Profile.css";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { addChat, leaveChat } from "../../../store/chats";
+import { jwtFetch } from "../../../store/jwt";
 import ActiveUsers from "./ActiveUsers/ActiveUsers";
 import ChatLog from "./ChatLog/ChatLog";
-import { addChat, leaveChat } from "../../../store/chats";
 
 function GroupChatShow({ theme, socket }) {
   const [chat, setChat] = useState({});
@@ -22,11 +23,13 @@ function GroupChatShow({ theme, socket }) {
   useEffect(() => {
     socket.on("return", () => {
       console.log("recieved");
+      fetch(`/api/message/${id}`)
+        .then((res) => res.json())
+        .then((chatLog) => setChatLog(chatLog));
     });
   }, []);
 
   useEffect(() => {
-    console.log(id, chatId);
     if (id !== chatId) {
       socket.emit("chat-leave", { userId: user.username, chatroomId: chatId });
       dispatch(leaveChat());
@@ -56,20 +59,22 @@ function GroupChatShow({ theme, socket }) {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    socket.emit("test");
-    // jwtFetch(`/api/message/create/${id}`, {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     author: user._id,
-    //     authorName: user.username,
-    //     body,
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((chat) => {
-    //     setBody("");
-    //     setChatLog([...chatLog, chat]);
-    //   });
+    if (body.length > 0) {
+      jwtFetch(`/api/message/create/${id}`, {
+        method: "POST",
+        body: JSON.stringify({
+          author: user._id,
+          authorName: user.username,
+          body,
+        }),
+      })
+        .then((res) => res.json())
+        .then((chat) => {
+          socket.emit("test");
+          setBody("");
+          setChatLog([...chatLog, chat]);
+        });
+    }
   };
 
   return (
