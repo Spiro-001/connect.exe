@@ -54,7 +54,24 @@
     box-shadow: 12px 0px 22px -10px rgba(0,0,0,0.1);
     z-index: 1;
 
-    transition: width 0.2s 0.2s, opacity 0.2s 0s, min-width 0.5s
+    animation-name: slideLeftMenu;
+    animation-duration: 0.2s;
+    animation-timing-function:ease-out;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+
+@keyframes slideLeftMenu {
+    0% {
+        width: 0px;
+        min-width: 0px;
+        opacity: 0;
+    }
+    100% {
+        width: 384px;
+        min-width: 384px;
+        opacity: 1;
+    }
 }
 
 .left-menu:hover {

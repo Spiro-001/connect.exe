@@ -44,18 +44,8 @@ function CreateChat({ theme }) {
   return (
     <div className="main-createchat" data-theme={theme}>
       <div className="create-chat">
-        <div
-          className="left-menu"
-          style={{ minWidth: `${openLeftMenu}px`, opacity: openLeftMenu }}
-        >
-          <div
-            className="title-groupchat"
-            onClick={(e) =>
-              openLeftMenu === 0 ? setOpenLeftMenu(384) : setOpenLeftMenu(0)
-            }
-          >
-            Open chat
-          </div>
+        <div className="left-menu">
+          <div className="title-groupchat">Open chat</div>
           <div className="open-chats">
             {allChat?.map((chatData) => {
               if (chatData.owner === user._id) {
