@@ -22,6 +22,11 @@
     color: var(--white-text);
     background-color: var(--self-bubble);
     box-shadow: -4px 3px 8px -2px rgba(0,0,0,0.25);
+    
+    animation-name: fadeIn;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
 }
 
 .self-username {
@@ -41,6 +46,11 @@
     color: var(--white-text);
     background-color: var(--other-bubble);
     box-shadow: 4px 3px 8px -2px rgba(0,0,0,0.25);
+
+    animation-name: fadeIn;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
 }
 
 .other-username {
@@ -50,4 +60,13 @@
     font-size: 12px;
     font-weight: 600;
     color: var(--text-primary);
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
