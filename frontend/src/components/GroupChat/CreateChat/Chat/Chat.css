@@ -27,11 +27,14 @@
 }
 
 .chat-name {
-    border: 1px solid var(--border-primary);
-    padding: 8px 24px;
+    padding: 10px 24px;
     width: 85%;
     box-sizing: border-box;
+    border-radius: 6px;
     white-space: nowrap;
+    background-color: var(--chat-name-background);
+    font-weight: 600;
+    color: var(--chat-name-color);
 }
 
 .left-menu {
@@ -43,11 +46,11 @@
     justify-content: flex-start;
     align-items: center;
     align-content: center;
-    padding: 12px 0px;
+    padding: 24px 0px;
     box-sizing: border-box;
     border-right: 1px solid var(--border-super-light);
     background-color: var(--left-menu-background);
-    box-shadow: 18px 0px 22px -14px rgba(0,0,0,0.15);
+    box-shadow: 12px 0px 22px -10px rgba(0,0,0,0.1);
     z-index: 1;
 
     transition: width 0.2s 0.2s, opacity 0.2s 0s, min-width 0.5s

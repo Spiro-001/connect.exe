@@ -34,17 +34,20 @@
     grid-column-start: 3;
     grid-column-end: 5;
     border-left: 1px solid var(--border-super-light);
+    font-weight: 600;
 }
 
 .nav-button {
-    border: 1px solid var(--border-primary);
-    padding: 6px 12px;
+    border-radius: 6px;
+    padding: 10px 20px;
     white-space: nowrap;
     text-decoration: none;
-    color: var(--text-primary);
+    color: var(--white-text);
+    background-color: var(--nav-button-color);
 }
 
 .nav-button:hover {
+    background-color: var(--nav-button-hover-color);
     cursor: pointer;
 }
 

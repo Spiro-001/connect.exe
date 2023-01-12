@@ -7,7 +7,7 @@
     grid-row: 2;
     grid-column-start: 1;
     grid-column-end: 4;
-    background-color: var(--background);
+    background-color: var(--group-chat-index-background);
     color: var(--text-div);
 }
 
