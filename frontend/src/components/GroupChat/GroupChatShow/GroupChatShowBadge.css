@@ -1,5 +1,4 @@
 .badge-group-show {
-    border: 1px solid var(--border-super-light);
     box-sizing: border-box;
     padding: 4px 24px;
     border-radius: 6px;
@@ -14,7 +13,9 @@
 
 
 .title {
-    background-color: var(--title-show-badge)
+    font-weight: 600;
+    background-color: var(--title-show-badge);
+    color: var(--white-text);
 }
 
 .description {
@@ -24,5 +25,7 @@
 }
 
 .owner {
+    font-weight: 600;
+    color: var(--group-chat-font-color);
     background-color: var(--owner-show-badge)
 }

@@ -1,20 +1,19 @@
 .badge-profile {
-    border: 1px solid var(--border-super-light);
     box-sizing: border-box;
-    padding: 4px 12px;
+    padding: 6px 12px;
     border-radius: 6px;
     text-align: center;
     width: 108px;
+    color: var(--white-text);
+    font-weight: 600;
 }
 
 .username {
     background-color: var(--description-badge);
-    color: var(--text-primary);
 }
 
 .email {
     background-color: var(--description-badge);
-    color: var(--text-primary);
 }
 
 .mini {

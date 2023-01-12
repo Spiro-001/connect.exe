@@ -30,27 +30,32 @@ function Profile({ theme, setTheme, socket }) {
   };
 
   const handleOnSubmitEdit = (e) => {
-    dispatch(clearSessionErrors());
-    let email = user.email;
-    setPassword("");
-    e.preventDefault();
-    dispatch(login({ email, password })).then((res) => {
-      if (res.type === "session/RECEIVE_CURRENT_USER") {
-        dispatch(
-          editUser({
-            currentUser: {
-              email,
-              password,
-            },
-            editUser: {
-              username,
-              email,
-            },
-          })
-        );
-        setOpenEdit("none");
-      }
-    });
+    console.log(password);
+    if (password.length === 0) {
+      setOpenEdit("none");
+    } else {
+      dispatch(clearSessionErrors());
+      let email = user.email;
+      setPassword("");
+      e.preventDefault();
+      dispatch(login({ email, password })).then((res) => {
+        if (res.type === "session/RECEIVE_CURRENT_USER") {
+          dispatch(
+            editUser({
+              currentUser: {
+                email,
+                password,
+              },
+              editUser: {
+                username,
+                email,
+              },
+            })
+          );
+          setOpenEdit("none");
+        }
+      });
+    }
   };
 
   return (
@@ -89,6 +94,7 @@ function Profile({ theme, setTheme, socket }) {
                 </span>
                 <input
                   className="profile-edit-input"
+                  id="disabled"
                   style={{ display: openEdit === "none" ? "none" : "block" }}
                   type="email"
                   value={email}
@@ -114,26 +120,29 @@ function Profile({ theme, setTheme, socket }) {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <button
-                className="edit-button-profile"
+              <div
+                className="edit-button"
+                id="right"
                 style={{ display: openEdit === "none" ? "none" : "block" }}
                 onClick={handleOnSubmitEdit}
               >
                 Confirm
-              </button>
-              <div className="edit-div">
-                <div
-                  className="edit-button"
-                  onClick={(e) => {
-                    dispatch(clearSessionErrors());
-                    openEdit === "none"
-                      ? setOpenEdit("flex")
-                      : setOpenEdit("none");
-                  }}
-                >
-                  Edit
-                </div>
               </div>
+              {openEdit === "none" && (
+                <div className="edit-div">
+                  <div
+                    className="edit-button"
+                    onClick={(e) => {
+                      dispatch(clearSessionErrors());
+                      openEdit === "none"
+                        ? setOpenEdit("flex")
+                        : setOpenEdit("none");
+                    }}
+                  >
+                    Edit
+                  </div>
+                </div>
+              )}
             </div>
             <button className="switch-theme-button" onClick={switchTheme}>
               {theme === "light" ? "Dark" : "Light"} Theme

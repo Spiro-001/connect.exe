@@ -6,7 +6,8 @@
     align-items: center;
     width: 288px;
     min-width: 288px;
-    border: 1px solid var(--border-primary);
+    border-left: 1px solid var(--border-super-light);
+    background-color: var(--active-user-body);
     color: var(--text-primary);
 }
 
@@ -18,7 +19,9 @@
     height: 81px;
     width: 100%;
     margin: 0px;
-    border: 1px solid var(--border-primary);
+    border-bottom: 1px solid var(--border-super-light);
+    box-sizing: border-box;
+    background-color: var(--active-user-title);
 }
 
 .active-user-list {

@@ -59,7 +59,6 @@ export function App() {
             setTheme={setTheme}
           />
         </Switch>
-        <BottomNav theme={theme} />
       </>
     )
   );

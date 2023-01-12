@@ -48,6 +48,7 @@
     align-content: center;
     padding: 24px 0px;
     box-sizing: border-box;
+    overflow: hidden;
     border-right: 1px solid var(--border-super-light);
     background-color: var(--left-menu-background);
     box-shadow: 12px 0px 22px -10px rgba(0,0,0,0.1);

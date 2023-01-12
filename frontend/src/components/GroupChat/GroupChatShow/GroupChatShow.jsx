@@ -132,7 +132,7 @@ function GroupChatShow({ theme, socket }) {
               alt="temp-pfp"
               className="pfp-chat-top"
             />
-            <span>
+            <span id="span-title">
               <div className="badge-group-show title">Title</div>
               {editTitle && (
                 <form
@@ -149,7 +149,7 @@ function GroupChatShow({ theme, socket }) {
                   </button>
                 </form>
               )}
-              {!editTitle && chat.title}
+              <p id="title">{!editTitle && chat.title}</p>
               <div
                 className="edit-icon"
                 onClick={(e) => {
@@ -162,6 +162,10 @@ function GroupChatShow({ theme, socket }) {
                   <Edit height="20px" width="20px" className="edit-icon" />
                 )}
               </div>
+            </span>
+            <span id="span-owner">
+              <div className="badge-group-show owner">Owner</div>
+              <p id="owner">{chat.ownerUsername}</p>
             </span>
             <span>
               <div className="badge-group-show description">Description</div>
@@ -180,7 +184,7 @@ function GroupChatShow({ theme, socket }) {
                   </button>
                 </form>
               )}
-              {!editDescription && chat.description}
+              <p id="description">{!editDescription && chat.description}</p>
               <div
                 className="edit-icon"
                 onClick={(e) => {
@@ -191,10 +195,6 @@ function GroupChatShow({ theme, socket }) {
               >
                 {!editDescription && <Edit height="20px" width="20px" />}
               </div>
-            </span>
-            <span>
-              <div className="badge-group-show owner">Owner</div>
-              {chat.ownerUsername}
             </span>
           </div>
           <ChatLog chatLog={chatLog} id={id} userId={user._id} key={id} />
