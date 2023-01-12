@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Switch, useHistory } from "react-router-dom";
 
 import { AuthRoute, ProtectedRoute } from "./components/Routes/Routes";
@@ -18,8 +18,6 @@ import BottomNav from "./components/BottomNav/BottomNav";
 
 import useLocalStorage from "use-local-storage";
 
-import { io } from "socket.io-client";
-
 export function App() {
   const history = useHistory();
 
@@ -28,12 +26,6 @@ export function App() {
     "theme",
     defaultDark ? "dark" : "light"
   );
-
-  const socket = io();
-
-  useEffect(() => {
-    socket.on("connection", (socket) => {});
-  }, []);
 
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -59,14 +51,12 @@ export function App() {
             path="/groupchats"
             component={GroupChat}
             theme={theme}
-            socket={socket}
           />
           <ProtectedRoute
             path="/profile"
             component={Profile}
             theme={theme}
             setTheme={setTheme}
-            socket={socket}
           />
         </Switch>
         <BottomNav theme={theme} />

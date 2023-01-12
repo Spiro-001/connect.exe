@@ -10,6 +10,8 @@ function NavBar({ theme }) {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const logo = "connect.exe".toUpperCase();
+
   const logoutUser = (e) => {
     e.preventDefault();
     dispatch(logout());
@@ -50,7 +52,7 @@ function NavBar({ theme }) {
 
   return (
     <div className="top-nav" data-theme={theme}>
-      <h1 className="logo">Team Talk</h1>
+      <h1 className="logo">{logo}</h1>
       {getLinks()}
     </div>
   );

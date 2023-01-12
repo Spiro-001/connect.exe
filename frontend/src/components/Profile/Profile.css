@@ -116,19 +116,6 @@
     padding: 2px 12px;
 }
 
-.top-input {
-    box-sizing: border-box;
-    padding: 12px 24px;
-    font-size: 14px;
-    height: 100%;
-    width: 100%;
-    outline: none;
-    border: 0;
-    border: 1px solid var(--border-primary);
-    background-color: var(--background);
-    color: var(--text-primary)
-}
-
 ::placeholder {
     color: var(--text-primary)
 }
@@ -143,13 +130,21 @@
     --border-primary: black;
     --border-div: black;
     --border-super-light: rgba(0,0,0,0.1);
-    --description-badge: rgb(155, 255, 222);
+    --description-badge: rgb(220, 146, 252);
     --title-show-badge: rgb(155, 255, 222);
     --description-show-badge: rgb(155, 255, 222);
     --owner-show-badge: rgb(155, 255, 222);
     --disabled: rgba(0,0,0,0.1);
     --self-bubble: rgb(17, 118, 233);
-    --other-bubble: rgb(93, 93, 93);
+    --other-bubble: rgb(155, 155, 155);
+    --group-chat-name-color: rgb(255, 206, 206);
+    --group-chat-font-color: white;
+    --group-chat-container: rgb(250, 250, 250);
+    --group-chat-background: white;
+    --group-chat-index-background: rgb(251, 251, 251);
+    --open-chat-color: rgb(119, 119, 119);
+    --open-chat-text: rgb(255, 255, 255);
+    --left-menu-background: rgb(247, 247, 247);
 }
 
 [data-theme='dark'] {
@@ -169,4 +164,12 @@
     --disabled: rgba(0,0,0,1);
     --self-bubble: rgb(17, 118, 233);
     --other-bubble: rgb(93, 93, 93);
+    --group-chat-name-color: rgb(255, 206, 206);
+    --group-chat-font-color: white;
+    --group-chat-container: rgb(250, 250, 250);
+    --group-chat-background: white;
+    --group-chat-index-background: rgb(251, 251, 251);
+    --open-chat-color: rgb(221, 255, 199);
+    --open-chat-text: white;
+    --left-menu-background: rgb(239, 239, 239);
 }

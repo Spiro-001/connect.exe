@@ -18,6 +18,8 @@
 }
 
 .description {
+    font-weight: 600;
+    color: var(--group-chat-font-color);
     background-color: var(--description-show-badge)
 }
 

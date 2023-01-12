@@ -1,5 +1,5 @@
 .badge {
-    border: 1px solid var(--border-super-light);
+    /* border: 1px solid var(--border-super-light); */
     box-sizing: border-box;
     padding: 4px 12px;
     border-radius: 6px;
@@ -8,6 +8,8 @@
 .mini {
     font-size: 12px;
     padding: 4px 12px;
+    border: 1px solid var(--border-super-light);
+    font-weight: 600;
 }
 
 .description {

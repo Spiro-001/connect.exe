@@ -29,13 +29,17 @@ io.on("connection", (socket) => {
   console.log("connected");
   socket.emit("connection", null);
 
-  socket.on("test", () => {
-    socket.emit("return");
-    socket.broadcast.emit("return");
+  socket.on("user-login", (payload) => {
+    console.log(payload, 2222);
+  });
+
+  socket.on("send-message", () => {
+    socket.emit("message-return");
+    socket.broadcast.emit("message-return");
   });
 
   socket.on("chat-join", (payload) => {
-    console.log("user joined chat");
+    // console.log("user joined chat");
     if (activeUser[payload.chatroomId]) {
       if (!activeUser[payload.chatroomId].includes(payload.userId)) {
         activeUser[payload.chatroomId].push(payload.userId);
@@ -43,7 +47,7 @@ io.on("connection", (socket) => {
     } else {
       activeUser[payload.chatroomId] = [payload.userId];
     }
-    console.log(activeUser, activeUser[payload.chatroomId]);
+    // console.log(activeUser, activeUser[payload.chatroomId]);
     socket.emit("user-join", activeUser);
     socket.broadcast.emit("user-join", activeUser);
     // callback(activeUser[payload.chatroomId]);
@@ -51,19 +55,22 @@ io.on("connection", (socket) => {
 
   socket.on("chat-leave", (payload) => {
     if (activeUser[payload.chatroomId]) {
-      console.log("user left chat");
+      // console.log("user left chat");
       let removeUserIndex = activeUser[payload.chatroomId].indexOf(
         payload.userId
       );
-      console.log(removeUserIndex);
       if (removeUserIndex != -1) {
         activeUser[payload.chatroomId].splice(removeUserIndex, 1);
       }
     }
-    console.log(activeUser, activeUser[payload.chatroomId]);
+    // console.log(activeUser, activeUser[payload.chatroomId]);
     socket.emit("user-leave", activeUser);
     socket.broadcast.emit("user-leave", activeUser);
     // callback(activeUser[payload.chatroomId]);
+  });
+
+  socket.on("disconnect", () => {
+    socket.emit("disconnected");
   });
 });
 

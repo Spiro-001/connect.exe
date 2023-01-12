@@ -29,3 +29,33 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: blackberry;
+  src: url("./Fonts/BlackberryJamPersonalUse-rXOB.ttf");
+}
+
+@font-face {
+  font-family: cafe-francoise;
+  src: url("./Fonts/CafeFrancoise-EapP9.ttf");
+}
+
+@font-face {
+  font-family: goldoni;
+  src: url("./Fonts/Goldoni-65vo.ttf");
+}
+
+@font-face {
+  font-family: cavilant;
+  src: url("./Fonts/Cavilant-X3jaZ.ttf");
+}
+
+@font-face {
+  font-family: pixel;
+  src: url("./Fonts/Pixel.ttf");
+}
+
+@font-face {
+  font-family: sofia-sans;
+  src: url("./Fonts/SofiaSans-VariableFont_wght.ttf");
+}

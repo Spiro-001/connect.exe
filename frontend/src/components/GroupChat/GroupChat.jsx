@@ -11,10 +11,10 @@ function GroupChat({ theme, socket }) {
   return (
     <Switch>
       <ProtectedRoute exact path="/groupchats/create">
-        <CreateChat theme={theme} />
+        <CreateChat theme={theme} socket={socket} />
       </ProtectedRoute>
       <ProtectedRoute exact path="/groupchats/all">
-        <GroupChatIndex theme={theme} user={user} />
+        <GroupChatIndex theme={theme} user={user} socket={socket} />
       </ProtectedRoute>
       <ProtectedRoute exact path={"/groupchats/:id"}>
         <GroupChatShow theme={theme} socket={socket} />

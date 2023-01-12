@@ -1,19 +1,22 @@
 .chat {
-    border: 1px solid var(--border-primary);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     align-content: center;
     height: 54px;
-    padding: 12px 12px;
+    padding: 12px 24px;
     box-sizing: border-box;
-    background-color: var(--background);
+    background-color: var(--left-menu-background);
     color: var(--text-primary);
     text-decoration: none;
+
+    transition-property: background-color;
+    transition-duration: 0.2s;
 }
 
 .chat:hover {
+    background-color: rgba(0,0,0,0.1);
     cursor: pointer;
 }
 
@@ -40,12 +43,16 @@
     justify-content: flex-start;
     align-items: center;
     align-content: center;
-    border: 1px solid var(--border-primary);
+    padding: 12px 0px;
+    box-sizing: border-box;
+    border-right: 1px solid var(--border-super-light);
+    background-color: var(--left-menu-background);
+    box-shadow: 18px 0px 22px -14px rgba(0,0,0,0.15);
+    z-index: 1;
 
     transition: width 0.2s 0.2s, opacity 0.2s 0s, min-width 0.5s
 }
 
 .left-menu:hover {
     width: 24px;
-    cursor: pointer;
 }

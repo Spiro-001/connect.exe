@@ -26,12 +26,12 @@ function GroupChatShow({ theme, socket }) {
   const [activeUsers, setActiveUsers] = useState([]);
   const [chatLog, setChatLog] = useState([]);
   const user = useSelector((state) => state.session.user);
-  const chatId = useSelector((state) => state.chats.chatId);
+  const chatId = useSelector((state) => state.chats?.chatId);
   const dispatch = useDispatch();
   const { id } = useParams();
 
   useEffect(() => {
-    socket.on("return", () => {
+    socket.on("message-return", () => {
       fetch(`/api/message/${id}`)
         .then((res) => res.json())
         .then((chatLog) => setChatLog(chatLog));
@@ -79,7 +79,7 @@ function GroupChatShow({ theme, socket }) {
       })
         .then((res) => res.json())
         .then((chat) => {
-          socket.emit("test");
+          socket.emit("send-message");
           setBody("");
           setChatLog([...chatLog, chat]);
         });

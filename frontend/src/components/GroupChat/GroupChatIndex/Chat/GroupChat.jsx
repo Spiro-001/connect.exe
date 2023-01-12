@@ -2,7 +2,6 @@ import "./GroupChat.css";
 import "./GroupChatBadge.css";
 import "../../../Profile/Profile.css";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { jwtFetch } from "../../../../store/jwt";
 
 function GroupChat({
