@@ -13,15 +13,38 @@ import { getCurrentUser } from "./store/session";
 import GroupChat from "./components/GroupChat/GroupChat";
 import Profile from "./components/Profile/Profile";
 
+import { io } from "socket.io-client";
+
 import "./App.css";
-import BottomNav from "./components/BottomNav/BottomNav";
 
 import useLocalStorage from "use-local-storage";
+import { leaveChat } from "./store/chats";
 
 export function App() {
+  const user = useSelector((state) => state.session.user);
+  const chatId = useSelector((state) => state.chats?.chatId);
   const history = useHistory();
 
-  const defaultDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const socket = io();
+
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log(socket.id);
+    });
+
+    socket.on("disconnected", () => {
+      socket.emit("test-disconnect");
+      socket.emit("chat-leave", {
+        userId: user.username,
+        chatroomId: chatId,
+      });
+      dispatch(leaveChat());
+    });
+  }, []);
+
+  const defaultDark = window.matchMedia(
+    "(prefers-color-scheme: light)"
+  ).matches;
   const [theme, setTheme] = useLocalStorage(
     "theme",
     defaultDark ? "dark" : "light"
@@ -37,7 +60,7 @@ export function App() {
   return (
     loaded && (
       <>
-        <NavBar theme={theme} />
+        <NavBar theme={theme} socket={socket} />
         <Switch>
           <AuthRoute exact path="/" component={MainPage} theme={theme} />
           <AuthRoute exact path="/login" component={LoginForm} theme={theme} />
@@ -51,12 +74,14 @@ export function App() {
             path="/groupchats"
             component={GroupChat}
             theme={theme}
+            socket={socket}
           />
           <ProtectedRoute
             path="/profile"
             component={Profile}
             theme={theme}
             setTheme={setTheme}
+            socket={socket}
           />
         </Switch>
       </>

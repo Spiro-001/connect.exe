@@ -9,6 +9,7 @@ import BottomNav from "../../BottomNav/BottomNav";
 function GroupChatIndex({ theme, user, socket }) {
   const [allChat, setAllChats] = useState([]);
   const [confirmDelete, setConfirmDelete] = useState(false);
+
   const chatId = useSelector((state) => state.chats?.chatId);
   const dispatch = useDispatch();
 
@@ -40,6 +41,7 @@ function GroupChatIndex({ theme, user, socket }) {
                   allChat={allChat}
                   confirmDelete={confirmDelete}
                   setConfirmDelete={setConfirmDelete}
+                  socket={socket}
                 />
               );
             })

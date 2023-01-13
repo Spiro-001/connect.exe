@@ -3,6 +3,9 @@ import "./GroupChatBadge.css";
 import "../../../Profile/Profile.css";
 import { Link } from "react-router-dom";
 import { jwtFetch } from "../../../../store/jwt";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { leaveChat } from "../../../../store/chats";
 
 function GroupChat({
   chatData,
@@ -11,6 +14,7 @@ function GroupChat({
   allChat,
   confirmDelete,
   setConfirmDelete,
+  socket,
 }) {
   const handleOnClickDelete = () => {
     setConfirmDelete(false);
@@ -57,17 +61,20 @@ function GroupChat({
         )}
       </div>
       {confirmDelete === chatData._id && (
-        <div className="confirm-delete-modal">
-          <p id="warning">You are about to delete "{chatData.title}".</p>
-          <div className="options-confirm">
-            <span id="yes" onClick={handleOnClickDelete}>
-              Confirm
-            </span>
-            <span id="no" onClick={(e) => setConfirmDelete(false)}>
-              Cancel
-            </span>
+        <>
+          <div className="blur-background"></div>
+          <div className="confirm-delete-modal">
+            <p id="warning">You are about to delete "{chatData.title}".</p>
+            <div className="options-confirm">
+              <span id="yes" onClick={handleOnClickDelete}>
+                Confirm
+              </span>
+              <span id="no" onClick={(e) => setConfirmDelete(false)}>
+                Cancel
+              </span>
+            </div>
           </div>
-        </div>
+        </>
       )}
     </>
   );

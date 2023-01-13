@@ -35,15 +35,15 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 12px 24px;
+    padding: 18px 24px;
     position: absolute;
     box-sizing: border-box;
-    height: 108px;
+    height: 162px;
     width: 384px;
-    top:calc(50% - 54px);
+    top:calc(50% - 81px);
     left: calc(50% - 192px);
     border-radius: 10px;
-    border: 1px solid var(--border-primary);
+    background-color: var(--confirm-delete-background);
     z-index: 3;
 }
 
@@ -57,6 +57,7 @@
 
 #warning {
     margin: 0px;
+    font-weight: 600;
 }
 
 .options-confirm {
@@ -67,24 +68,37 @@
 
 .confirm-delete-modal span#yes {
     width: fit-content;
-    padding: 2px 12px;
-    border: 1px solid var(--border-primary);
+    padding: 4px 12px;
+    border-radius: 6px;
+    background-color: var(--confirm-background-color);
+    font-weight: 600;
+    color: var(--white-text);
 }
 
 .confirm-delete-modal span#no {
     width: fit-content;
-    padding: 2px 12px;
-    border: 1px solid var(--border-primary);
+    padding: 4px 12px;
+    border-radius: 6px;
+    background-color: var(--confirm-background-color);
+    font-weight: 600;
+    color: var(--white-text);
 }
 
-.confirm-delete-modal span:hover {
+.confirm-delete-modal span#no:hover {
     cursor: pointer;
+    background-color: var(--confirm-background-color-hover);
+}
+
+.confirm-delete-modal span#yes:hover {
+    cursor: pointer;
+    background-color: var(--confirm-background-color-hover);
 }
 
 .delete-groupchat {
     position: absolute;
-    top: 0px;
+    top: -4px;
     right: 6px;
+    font-size: 20px;
     z-index: 2;
 }
 
@@ -156,4 +170,14 @@
     align-content: center;
     gap: 0px 6px;
     width: 100%;
+}
+
+.blur-background {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: var(--confirm-blur-background-color);
+    z-index: 3;
 }

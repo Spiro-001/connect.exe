@@ -29,6 +29,15 @@ io.on("connection", (socket) => {
   console.log("connected");
   socket.emit("connection", null);
 
+  socket.on("disconnect", () => {
+    socket.emit("disconnected");
+    console.log("user disconnect");
+  });
+
+  socket.on("test-disconnect", () => {
+    console.log("test-disconnect command");
+  });
+
   socket.on("user-login", (payload) => {
     console.log(payload, 2222);
   });
@@ -55,7 +64,7 @@ io.on("connection", (socket) => {
 
   socket.on("chat-leave", (payload) => {
     if (activeUser[payload.chatroomId]) {
-      // console.log("user left chat");
+      console.log("user left chat");
       let removeUserIndex = activeUser[payload.chatroomId].indexOf(
         payload.userId
       );
@@ -67,10 +76,6 @@ io.on("connection", (socket) => {
     socket.emit("user-leave", activeUser);
     socket.broadcast.emit("user-leave", activeUser);
     // callback(activeUser[payload.chatroomId]);
-  });
-
-  socket.on("disconnect", () => {
-    socket.emit("disconnected");
   });
 });
 

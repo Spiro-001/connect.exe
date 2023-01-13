@@ -6,9 +6,11 @@ import { useEffect, useState } from "react";
 
 import "./Profile.css";
 import "./ProfileBadge.css";
+import { leaveChat } from "../../store/chats";
 
 function Profile({ theme, setTheme, socket }) {
   const user = useSelector((state) => state.session.user);
+  const chatId = useSelector((state) => state.chats?.chatId);
   const errors = useSelector((state) => state.errors.session);
 
   const [username, setUsername] = useState(user ? user.username : "");
@@ -17,12 +19,12 @@ function Profile({ theme, setTheme, socket }) {
   const [openEdit, setOpenEdit] = useState("none");
 
   const history = useHistory();
-
-  // useEffect(() => {
-  //   socket.emit("chat-leave", { userId: user._id });
-  // }, []);
-
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    socket.emit("chat-leave", { userId: user.username, chatroomId: chatId });
+    dispatch(leaveChat());
+  }, []);
 
   const switchTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";

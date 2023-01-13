@@ -172,6 +172,10 @@
     --active-user-title: white;
     --active-user-body: rgb(250, 250, 250);
     --session-form-background: rgb(253, 216, 181);
+    --confirm-delete-background: white;
+    --confirm-blur-background-color: rgba(0,0,0,0.6);
+    --confirm-background-color: rgb(244, 177, 177);
+    --confirm-background-color-hover: rgb(220, 156, 156);
 }
 
 [data-theme='dark'] {

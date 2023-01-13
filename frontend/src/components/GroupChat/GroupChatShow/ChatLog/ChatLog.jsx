@@ -1,11 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import "./ChatBubble.css";
 
 function ChatLog({ userId, chatLog }) {
   let previousAuthor = [];
+  const chatWindow = useRef(null);
+
+  useEffect(() => {
+    if (chatWindow) {
+      chatWindow.current.addEventListener("DOMNodeInserted", (event) => {
+        const { currentTarget: target } = event;
+        target.scroll({ top: target.scrollHeight, behavior: "smooth" });
+      });
+    }
+  });
 
   return (
-    <div className="middle-main-chat-show">
+    <div className="middle-main-chat-show" ref={chatWindow}>
       {chatLog?.map((message) => {
         previousAuthor.push(message.author);
         if (message.author === userId) {

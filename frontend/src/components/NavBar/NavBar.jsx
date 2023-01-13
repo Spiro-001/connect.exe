@@ -4,9 +4,12 @@ import { logout } from "../../store/session";
 
 import "./NavBar.css";
 import "../Profile/Profile.css";
+import { leaveChat } from "../../store/chats";
 
-function NavBar({ theme }) {
+function NavBar({ theme, socket }) {
   const loggedIn = useSelector((state) => !!state.session.user);
+  const user = useSelector((state) => state.session.user);
+  const chatId = useSelector((state) => state.chats?.chatId);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -14,6 +17,8 @@ function NavBar({ theme }) {
 
   const logoutUser = (e) => {
     e.preventDefault();
+    socket.emit("chat-leave", { userId: user.username, chatroomId: chatId });
+    dispatch(leaveChat());
     dispatch(logout());
     history.push("/login");
   };

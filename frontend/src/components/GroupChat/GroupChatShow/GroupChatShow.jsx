@@ -22,9 +22,9 @@ function GroupChatShow({ theme, socket }) {
   const [editDescriptionValue, setEditDescriptionValue] = useState(
     chat.description
   );
-
   const [activeUsers, setActiveUsers] = useState([]);
   const [chatLog, setChatLog] = useState([]);
+
   const user = useSelector((state) => state.session.user);
   const chatId = useSelector((state) => state.chats?.chatId);
   const dispatch = useDispatch();
@@ -88,38 +88,42 @@ function GroupChatShow({ theme, socket }) {
 
   const handleOnSubmitEditTitle = (e) => {
     e.preventDefault();
-    jwtFetch(`/api/groupchats/edit/${chatId}`, {
-      method: "PATCH",
-      body: JSON.stringify({
-        title: editTitleValue,
-        description: editDescriptionValue,
-      }),
-    })
-      .then((res) => res.json)
-      .then((data) => {
-        chat.title = editTitleValue;
-        chat.description = editDescriptionValue;
-        setEditTitle(false);
-        setEditDescription(false);
-      });
+    if (user._id === chat.owner) {
+      jwtFetch(`/api/groupchats/edit/${chatId}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          title: editTitleValue,
+          description: editDescriptionValue,
+        }),
+      })
+        .then((res) => res.json)
+        .then((data) => {
+          chat.title = editTitleValue;
+          chat.description = editDescriptionValue;
+          setEditTitle(false);
+          setEditDescription(false);
+        });
+    }
   };
 
   const handleOnSubmitEditDescription = (e) => {
     e.preventDefault();
-    jwtFetch(`/api/groupchats/edit/${chatId}`, {
-      method: "PATCH",
-      body: JSON.stringify({
-        title: editTitleValue,
-        description: editDescriptionValue,
-      }),
-    })
-      .then((res) => res.json)
-      .then((data) => {
-        chat.title = editTitleValue;
-        chat.description = editDescriptionValue;
-        setEditTitle(false);
-        setEditDescription(false);
-      });
+    if (user._id === chat.owner) {
+      jwtFetch(`/api/groupchats/edit/${chatId}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          title: editTitleValue,
+          description: editDescriptionValue,
+        }),
+      })
+        .then((res) => res.json)
+        .then((data) => {
+          chat.title = editTitleValue;
+          chat.description = editDescriptionValue;
+          setEditTitle(false);
+          setEditDescription(false);
+        });
+    }
   };
 
   return (
@@ -158,7 +162,7 @@ function GroupChatShow({ theme, socket }) {
                   setEditTitle(editTitle ? false : true);
                 }}
               >
-                {!editTitle && (
+                {!editTitle && user._id === chat.owner && (
                   <Edit height="20px" width="20px" className="edit-icon" />
                 )}
               </div>
@@ -193,7 +197,9 @@ function GroupChatShow({ theme, socket }) {
                   setEditDescription(editDescription ? false : true);
                 }}
               >
-                {!editDescription && <Edit height="20px" width="20px" />}
+                {!editDescription && user._id === chat.owner && (
+                  <Edit height="20px" width="20px" />
+                )}
               </div>
             </span>
           </div>

@@ -2,23 +2,34 @@ import { useEffect, useState } from "react";
 import Chat from "./Chat/Chat";
 import "./CreateChat.css";
 import "../../Profile/Profile.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { jwtFetch } from "../../../store/jwt";
 import { useHistory } from "react-router-dom";
+import { leaveChat } from "../../../store/chats";
 
-function CreateChat({ theme }) {
+function CreateChat({ theme, socket }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [openLeftMenu, setOpenLeftMenu] = useState(0);
   const [allChat, setAllChats] = useState([]);
 
   const history = useHistory();
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.session.user);
+  const chatId = useSelector((state) => state.chats?.chatId);
 
   useEffect(() => {
     fetch("/api/groupchats/all")
       .then((res) => res.json())
       .then((data) => setAllChats(data));
+  }, []);
+
+  useEffect(() => {
+    socket.emit("chat-leave", {
+      userId: user.username,
+      chatroomId: chatId,
+    });
+    dispatch(leaveChat());
   }, []);
 
   const handleOnSubmit = (e) => {
