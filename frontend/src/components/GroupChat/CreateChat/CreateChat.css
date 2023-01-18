@@ -70,23 +70,35 @@
     width: 100%;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     align-content: center;
     z-index: 0;
 }
 
 .top-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
     box-sizing: border-box;
     padding: 12px 24px;
     font-size: 14px;
     height: 100%;
     width: 100%;
     outline: none;
-    border: 0;
+    border: 0px;
     background-color: var(--background);
     color: var(--text-primary);
     border-left: 1px solid var(--border-super-light);
     border-right: 1px solid var(--border-super-light);
+}
+
+.top-input[type="file"]::file-selector-button {
+    border-radius: 4px;
+    padding: 2px 6px;
+    outline: 0px;
+    border: 0px;
 }
 
 .input-sendmessage {
@@ -121,10 +133,43 @@
     box-sizing: border-box;
     color: rgba(0,0,0,0.6);
     min-height: 54px;
+    height: fit-content;
     width: 100%;
     background-color: var(--background);
     color: var(--text-primary);
     border-bottom: 1px solid var(--border-super-light);
+}
+
+.first-part {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    font-size: 14px;
+    box-sizing: border-box;
+    color: rgba(0,0,0,0.6);
+    min-height: 54px;
+    width: 100%;
+    background-color: var(--background);
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-super-light); 
+}
+
+.second-part {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    font-size: 14px;
+    box-sizing: border-box;
+    color: rgba(0,0,0,0.6);
+    min-height: 54px;
+    width: 100%;
+    background-color: var(--background);
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-super-light); 
 }
 
 .main-start-chat {
@@ -155,4 +200,135 @@
     width: 100%;
     border-top: 1px solid var(--border-super-light);
     border-left: 1px solid var(--border-super-light);
+}
+
+#span-description {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    gap: 24px;
+}
+
+#preview-img {
+    border: 0px;
+    width: fit-content;
+    display: flex;
+    gap: 48px;
+    overflow: hidden;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.preview-photo {
+    /* padding: 24px; */
+    margin-left: 24px;
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.react-tag {
+    position: relative;
+    width: 100%;
+}
+
+.react-tag-div {
+    width: 100%;
+}
+
+.react-tag-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    box-sizing: border-box;
+    padding: 12px 24px;
+    font-size: 14px;
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: 0px;
+    background-color: var(--background);
+    color: var(--text-primary);
+}
+
+.tag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    position: relative;
+    left: 0px;
+    width: fit-content;
+    z-index: 1;
+    height: fit-content;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-weight: 700;
+    color: var(--white-text);
+    background-color: var(--create-room-button);
+}
+
+.react-tag-selected {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    position: absolute;
+    right: 0px;
+    align-items: center;
+    padding: 0px 24px;
+    gap: 12px;
+    height: 41px;
+}
+
+.react-tag-suggestion {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    position: absolute;
+    left: 12px;
+    bottom: 36px;
+    height: 24px;
+    width: fit-content;
+    background-color: var(--create-room-button);
+    box-shadow: 0px 8px 12px -4px rgba(0,0,0,0.1);
+    border: 1px solid var(--border-super-light);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    z-index: 10;
+}
+
+.react-tag-suggestion:hover {
+    cursor: pointer;
+}
+
+.react-tag-suggestion ul {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0px 12px;
+    margin: 0px;
+}
+
+.react-tag-suggestion mark {
+    background-color: transparent;
+    color: var(--text-primary);
+}
+
+.tag button {
+    outline: 0px;
+    background-color: transparent;
+    border: 0px
+}
+
+.tag button:hover {
+    cursor: pointer;
 }

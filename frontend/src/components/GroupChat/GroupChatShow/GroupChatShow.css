@@ -127,11 +127,17 @@
 }
 
 #span-title {
+    display: flex;
+    align-items: center;
     max-width: 405px;
+    gap: 24px;
 }
 
 #span-owner {
+    display: flex;
+    align-items: center;
     width: fit-content;
+    gap: 24px;
 }
 
 #title {
