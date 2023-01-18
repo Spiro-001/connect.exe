@@ -131,11 +131,20 @@ function GroupChatShow({ theme, socket }) {
       <div className="groupchat-show">
         <div className="chat-box">
           <div className="top-chat-box">
-            <img
-              src={`http://localhost:5000/api/groupchats/image/${chat.logo}`}
-              alt="temp-pfp"
-              className="pfp-chat-top"
-            />
+            {chat.logo && (
+              <img
+                src={`http://localhost:5000/api/groupchats/image/${chat.logo}`}
+                alt="temp-pfp"
+                className="pfp-chat-top"
+              />
+            )}
+            {!chat.logo && (
+              <img
+                src={require("../../../Images/c-logo.png")}
+                alt="temp-pfp"
+                className="pfp-chat-top"
+              />
+            )}
             <span id="span-title">
               <div className="badge-group-show title">Title</div>
               {editTitle && (

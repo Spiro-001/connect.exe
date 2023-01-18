@@ -18,6 +18,11 @@ function GroupChat({
 }) {
   const handleOnClickDelete = () => {
     setConfirmDelete(false);
+
+    jwtFetch(`/api/groupchats/image/delete/${chatData.logo}`, {
+      method: "DELETE",
+    }).then((res) => console.log(res));
+
     jwtFetch(`/api/groupchats/delete/${chatData._id}`, {
       method: "DELETE",
     });

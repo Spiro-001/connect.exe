@@ -5,8 +5,11 @@
     box-sizing: border-box;
     padding: 12px 24px;
     overflow: auto;
-    min-height: 718px;
+    min-height: 722px;
     gap: 4px 0px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--chat-bar) var(--background);
+    box-sizing: border-box;
 }
 
 .message {

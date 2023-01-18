@@ -9,13 +9,14 @@ const util = require("util");
 const unlinkFile = util.promisify(fs.unlink);
 const upload = require("./common");
 
-const { uploadFile, getFileStream } = require("../../s3");
+const { uploadFile, getFileStream, deleteFile } = require("../../s3");
 const multer = require("multer");
+
+// AWS COMMANDS
 
 router.post("/image/upload", upload.single("image"), async (req, res, next) => {
   const result = await uploadFile(req.file);
   await unlinkFile(req.file.path);
-
   res.send({
     status: "success",
     message: "File uploaded successfully",
@@ -27,12 +28,23 @@ router.get("/image/:key", (req, res, next) => {
   try {
     const key = req.params.key;
     const readStream = getFileStream(key);
-
     return readStream.pipe(res); // this line will make image readable
   } catch (err) {
     next(err);
   }
 });
+
+router.delete("/image/delete/:key", async (req, res, next) => {
+  try {
+    const key = req.params.key;
+    const result = await deleteFile(key);
+    return res.json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+
+//
 
 router.get("/", (_req, res, _next) => {
   res.json({ message: "GET /users" });

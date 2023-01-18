@@ -179,6 +179,8 @@
     --send-text-background: white;
     --top-send-bar-background: white;
     --chat-hover: rgba(0,0,0,0.1);
+    --border-tag: rgba(0,0,0,0.1);
+    --chat-bar: rgb(255, 194, 194);
 }
 
 [data-theme='dark'] {
@@ -226,4 +228,6 @@
     --top-send-bar-background:rgb(23, 23, 23);
     --chat-hover: rgb(0, 0, 0);
     --chat-confirm-edit: rgb(112, 32, 198);
+    --border-tag: white;
+    --chat-bar: rgb(136, 43, 201);
 }

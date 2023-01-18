@@ -25,21 +25,27 @@ export function App() {
   const chatId = useSelector((state) => state.chats?.chatId);
   const history = useHistory();
 
+  const [loaded, setLoaded] = useState(false);
+  const dispatch = useDispatch();
+
   const socket = io();
 
   useEffect(() => {
-    socket.on("connect", () => {
-      console.log(socket.id);
-    });
-
-    socket.on("disconnected", () => {
-      socket.emit("test-disconnect");
-      socket.emit("chat-leave", {
-        userId: user.username,
-        chatroomId: chatId,
+    if (!loaded) {
+      console.log(loaded);
+      socket.on("connect", () => {
+        console.log(socket.id);
       });
-      dispatch(leaveChat());
-    });
+
+      socket.on("disconnected", () => {
+        socket.emit("test-disconnect");
+        socket.emit("chat-leave", {
+          userId: user.username,
+          chatroomId: chatId,
+        });
+        dispatch(leaveChat());
+      });
+    }
   }, []);
 
   const defaultDark = window.matchMedia(
@@ -49,9 +55,6 @@ export function App() {
     "theme",
     defaultDark ? "dark" : "light"
   );
-
-  const [loaded, setLoaded] = useState(false);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCurrentUser()).then(() => setLoaded(true));
