@@ -2,9 +2,10 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
-const { isProduction } = require("./config/keys");
 const debug = require("debug");
 const csurf = require("csurf");
+
+const { isProduction } = require("./config/keys");
 
 require("./models/User");
 require("./models/Chat");

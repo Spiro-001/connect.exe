@@ -36,7 +36,7 @@ function GroupChat({
         <Link className="group-chat" to={`/groupchats/${chatData._id}`}>
           <div className="top-groupchat">
             <img
-              src="https://media.npr.org/assets/img/2017/04/25/istock-115796521-fcf434f36d3d0865301cdcb9c996cfd80578ca99-s1100-c50.jpg"
+              src={`http://localhost:5000/api/groupchats/image/${chatData.logo}`}
               alt="temp-pfp"
               className="pfp-group-chat"
             />

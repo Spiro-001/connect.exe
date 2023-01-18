@@ -49,6 +49,7 @@
 
 .edit-icon {
     margin-left: auto;
+    fill: var(--text-primary);
 }
 
 .edit-icon:hover {
@@ -127,6 +128,7 @@
     height: 38px;
     width: 38px;
     object-fit: cover;
+    border-radius: 8px;
 }
 
 .group-chat-name {
@@ -160,6 +162,7 @@
 .description-body {
     margin: 0px;
     padding: 4px 0px;
+    color: var(--text-primary)
 }
 
 .bottom-groupchat {

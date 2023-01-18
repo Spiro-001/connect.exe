@@ -59,7 +59,7 @@ function SignupForm({ theme }) {
         <h2>Sign Up Form</h2>
         <div className="email-section">
           <label>
-            <span>Email</span>
+            {/* <span>Email</span> */}
             <input
               type="text"
               value={email}
@@ -71,7 +71,7 @@ function SignupForm({ theme }) {
         </div>
         <div className="username-section">
           <label>
-            <span>Username</span>
+            {/* <span>Username</span> */}
             <input
               type="text"
               value={username}
@@ -83,7 +83,7 @@ function SignupForm({ theme }) {
         </div>
         <div className="password-section">
           <label>
-            <span>Password</span>
+            {/* <span>Password</span> */}
             <input
               type="password"
               value={password}
@@ -95,7 +95,7 @@ function SignupForm({ theme }) {
         </div>
         <div className="confirm-password-section">
           <label>
-            <span>Confirm Password</span>
+            {/* <span>Confirm Password</span> */}
             <input
               type="password"
               value={password2}

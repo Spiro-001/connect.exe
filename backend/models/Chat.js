@@ -20,6 +20,10 @@ const chatSchema = Schema(
       type: String,
       required: true,
     },
+    logo: {
+      type: String,
+      required: true,
+    },
   },
   {
     timestamps: true,

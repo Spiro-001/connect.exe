@@ -5,10 +5,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { leaveChat } from "../../../store/chats";
 import BottomNav from "../../BottomNav/BottomNav";
+import LoadingChat from "./LoadingChat/LoadingChat";
 
 function GroupChatIndex({ theme, user, socket }) {
   const [allChat, setAllChats] = useState([]);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const chatId = useSelector((state) => state.chats?.chatId);
   const dispatch = useDispatch();
@@ -16,7 +18,10 @@ function GroupChatIndex({ theme, user, socket }) {
   useEffect(() => {
     fetch("/api/groupchats/all")
       .then((res) => res.json())
-      .then((data) => setAllChats(data));
+      .then((data) => {
+        setLoaded(true);
+        setAllChats(data);
+      });
   }, []);
 
   useEffect(() => {
@@ -28,7 +33,8 @@ function GroupChatIndex({ theme, user, socket }) {
     <>
       <div className="main-groupchatindex" data-theme={theme}>
         <div className="groupchat-index">
-          {allChat.length === 0 ? (
+          {!loaded && <LoadingChat />}
+          {loaded && allChat.length === 0 ? (
             <h1 id="no-chats">No chats available, create one now!</h1>
           ) : (
             allChat.map((chatData) => {

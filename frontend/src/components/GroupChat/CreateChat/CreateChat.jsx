@@ -12,6 +12,7 @@ function CreateChat({ theme, socket }) {
   const [description, setDescription] = useState("");
   const [openLeftMenu, setOpenLeftMenu] = useState(0);
   const [allChat, setAllChats] = useState([]);
+  const [fileData, setFileData] = useState();
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -32,23 +33,40 @@ function CreateChat({ theme, socket }) {
     dispatch(leaveChat());
   }, []);
 
+  const fileChangeHandler = (e) => {
+    setFileData(e.target.files[0]);
+  };
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    jwtFetch("/api/groupchats/create", {
+    let logo;
+    const data = new FormData();
+    data.append("image", fileData);
+
+    jwtFetch("/api/groupchats/image/upload", {
       method: "POST",
-      body: JSON.stringify({
-        owner: user._id,
-        ownerUsername: user.username,
-        title,
-        description,
-      }),
+      body: data,
     })
       .then((res) => res.json())
       .then((data) => {
-        setAllChats([...allChat, data]);
-        setTitle("");
-        setDescription("");
-        history.push(`/groupchats/${data._id}`);
+        logo = data.data.filename;
+        jwtFetch("/api/groupchats/create", {
+          method: "POST",
+          body: JSON.stringify({
+            owner: user._id,
+            ownerUsername: user.username,
+            title,
+            description,
+            logo,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            setAllChats([...allChat, data]);
+            setTitle("");
+            setDescription("");
+            history.push(`/groupchats/${data._id}`);
+          });
       });
   };
 
@@ -78,6 +96,11 @@ function CreateChat({ theme, socket }) {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Enter a description..."
+            />
+            <input
+              className="top-input"
+              type="file"
+              onChange={fileChangeHandler}
             />
           </div>
           <div className="main-start-chat">Start a new chat!</div>

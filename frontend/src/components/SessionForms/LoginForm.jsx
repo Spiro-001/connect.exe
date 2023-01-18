@@ -32,7 +32,7 @@ function LoginForm({ theme }) {
         <h2>Log In Form</h2>
         <div className="email-section">
           <label>
-            <span>Email</span>
+            {/* <span>Email</span> */}
             <input
               type="text"
               value={email}
@@ -44,7 +44,7 @@ function LoginForm({ theme }) {
         </div>
         <div className="password-section">
           <label>
-            <span>Password</span>
+            {/* <span>Password</span> */}
             <input
               type="password"
               value={password}

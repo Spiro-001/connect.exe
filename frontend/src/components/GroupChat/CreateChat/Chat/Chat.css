@@ -16,7 +16,7 @@
 }
 
 .chat:hover {
-    background-color: rgba(0,0,0,0.1);
+    background-color: var(--chat-hover);
     cursor: pointer;
 }
 
@@ -24,6 +24,7 @@
     height: 38px;
     width: 38px;
     object-fit: cover;
+    border-radius: 8px;
 }
 
 .chat-name {
