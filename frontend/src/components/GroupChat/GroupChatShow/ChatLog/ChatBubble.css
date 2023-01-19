@@ -65,6 +65,44 @@
     color: var(--text-primary);
 }
 
+#typing {
+    position: relative;
+    height: 21px;
+    width: 29px;
+}
+
+#typing span#first-dot{
+    position: absolute;
+    left: 14px;
+    animation-name: bouncing;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+    animation-iteration-count: infinite;
+}
+
+#typing span#second-dot{
+    position: absolute;
+    left: 26px;
+    animation-name: bouncing;
+    animation-duration: 1.5s;
+    animation-delay: 0.2s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+    animation-iteration-count: infinite;
+}
+
+#typing span#third-dot{
+    position: absolute;
+    left: 38px;
+    animation-name: bouncing;
+    animation-duration: 1.5s;
+    animation-delay: 0.4s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-in;
+    animation-iteration-count: infinite;
+}
+
 @keyframes fadeIn {
     0% {
         transform: translateY(10px) translateX(-5px);
@@ -73,5 +111,26 @@
     100% {
         transform: translateY(0px) translateX(0px);
         opacity: 1;
+    }
+}
+
+@keyframes bouncing {
+    0% {
+        transform: translateY(0px);
+    }
+    15% {
+        transform: translateY(-5px);
+    }
+    30% {
+        transform: translateY(0px);
+    }
+    35% {
+        transform: translateY(1px);
+    }
+    40% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(0px);
     }
 }

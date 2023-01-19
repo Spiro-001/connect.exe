@@ -47,6 +47,14 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("message-return");
   });
 
+  socket.on("user-typing", (user) => {
+    socket.broadcast.emit("other-typing", user);
+  });
+
+  socket.on("user-stop-typing", (user) => {
+    socket.broadcast.emit("other-stop-typing", user);
+  });
+
   socket.on("chat-join", (payload) => {
     // console.log("user joined chat");
     if (activeUser[payload.chatroomId]) {

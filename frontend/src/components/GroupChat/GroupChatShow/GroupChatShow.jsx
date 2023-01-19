@@ -26,6 +26,7 @@ function GroupChatShow({ theme, socket }) {
   const [chatLog, setChatLog] = useState([]);
   const [chatLogo, setChatLogo] = useState(chat?.logo);
   const [chatOwner, setChatOwner] = useState("");
+  const [userTyping, setUserTyping] = useState(false);
 
   const changeImage = useRef(null);
 
@@ -37,14 +38,6 @@ function GroupChatShow({ theme, socket }) {
 
   const history = useHistory();
   if (verifyPass && verifyPass !== id) history.push("/groupchats/all");
-
-  useEffect(() => {
-    socket.on("message-return", () => {
-      fetch(`/api/message/${id}`)
-        .then((res) => res.json())
-        .then((chatLog) => setChatLog(chatLog));
-    });
-  }, []);
 
   useEffect(() => {
     if (id !== chatId) {
@@ -61,6 +54,11 @@ function GroupChatShow({ theme, socket }) {
     });
     socket.on("user-leave", (payload) => {
       setActiveUsers(payload);
+    });
+    socket.on("message-return", () => {
+      fetch(`/api/message/${id}`)
+        .then((res) => res.json())
+        .then((chatLog) => setChatLog(chatLog));
     });
   }, []);
 
@@ -180,6 +178,22 @@ function GroupChatShow({ theme, socket }) {
       });
   };
 
+  useEffect(() => {
+    if (body.length > 0) {
+      setUserTyping(true);
+      socket.emit("user-typing", { user: user.username }, () => {});
+    } else {
+      setUserTyping(false);
+      socket.emit("user-stop-typing", { user: user.username }, () => {});
+    }
+  }, [body]);
+
+  const userStopTyping = () => {
+    socket.emit("user-stop-typing", () => {
+      setUserTyping(false);
+    });
+  };
+
   return (
     <div className="groupchat-main-show" data-theme={theme}>
       <div className="groupchat-show">
@@ -273,9 +287,18 @@ function GroupChatShow({ theme, socket }) {
               </div>
             </span>
           </div>
-          <ChatLog chatLog={chatLog} id={id} userId={user._id} key={id} />
+          <ChatLog
+            chatLog={chatLog}
+            id={id}
+            userId={user._id}
+            key={id}
+            socket={socket}
+            userTyping={userTyping}
+            userState={user}
+          />
           <form className="bottom-chat-box" onSubmit={handleOnSubmit}>
             <input
+              onBlur={userStopTyping}
               value={body}
               onChange={(e) => setBody(e.target.value)}
               className="send-message-input"

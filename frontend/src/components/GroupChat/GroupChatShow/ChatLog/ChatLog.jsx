@@ -4,12 +4,14 @@ import { jwtFetch } from "../../../../store/jwt";
 
 import "./ChatBubble.css";
 
-function ChatLog({ userId, chatLog }) {
+function ChatLog({ userId, chatLog, socket, userTyping, userState }) {
   let previousAuthor = [];
   const uniqueAuthor = useRef([]);
   const chatWindow = useRef(null);
   const messages = useRef({});
+
   const [loading, setLoading] = useState(false);
+  const [otherTyping, setOtherTyping] = useState(false);
 
   useEffect(() => {
     if (chatWindow.current) {
@@ -19,6 +21,21 @@ function ChatLog({ userId, chatLog }) {
       });
     }
   });
+
+  useEffect(() => {
+    socket.on("other-typing", (user) => {
+      console.log(userState.username, user.user);
+      if (userState.username !== user.user) {
+        setOtherTyping(true);
+      }
+    });
+
+    socket.on("other-stop-typing", (user) => {
+      if (userState.username !== user.user) {
+        setOtherTyping(false);
+      }
+    });
+  }, [socket]);
 
   useEffect(() => {
     if (uniqueAuthor) {
@@ -64,7 +81,7 @@ function ChatLog({ userId, chatLog }) {
                     <span className="other-username">
                       {messages.current.hasOwnProperty(message.author)
                         ? messages.current[message.author]
-                        : "2"}
+                        : "loading"}
                     </span>
                   )}
                   <span className="other">{message.body}</span>
@@ -73,6 +90,20 @@ function ChatLog({ userId, chatLog }) {
             }
           })}
         </>
+      )}
+      {userTyping && (
+        <div className="self" id="typing">
+          <span id="first-dot">●</span>
+          <span id="second-dot">●</span>
+          <span id="third-dot">●</span>
+        </div>
+      )}
+      {otherTyping && (
+        <div className="other" id="typing">
+          <span id="first-dot">●</span>
+          <span id="second-dot">●</span>
+          <span id="third-dot">●</span>
+        </div>
       )}
     </div>
   );
