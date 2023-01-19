@@ -211,7 +211,9 @@
 
 #preview-img {
     border: 0px;
+    height: 248px;
     width: fit-content;
+    align-items: flex-start;
     display: flex;
     gap: 48px;
     overflow: hidden;
@@ -274,15 +276,21 @@
 
 .react-tag-selected {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
     position: absolute;
+    top: 132px;
     right: 0px;
     align-items: center;
     padding: 0px 24px;
     gap: 12px;
-    height: 41px;
+    height: 82px;
+    max-width: 650px;
+    max-height: 300px;
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    overflow-y: auto;
 }
 
 .react-tag-suggestion {
@@ -331,4 +339,22 @@
 
 .tag button:hover {
     cursor: pointer;
+}
+
+#password-protected {
+    margin: 0px;
+    margin-right: auto;
+    color: var(--text-primary);
+}
+
+.password-chat-input {
+    outline: 0px;
+    border-radius: 8px;
+    border: 1px solid var(--border-super-light);
+    padding: 4px 12px;
+}
+
+.password-lock-svg {
+    fill: var(--main-div);
+    height: 22px;
 }

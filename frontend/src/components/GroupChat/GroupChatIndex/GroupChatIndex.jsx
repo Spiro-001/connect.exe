@@ -3,7 +3,7 @@ import "./GroupChatIndex.css";
 import "../../Profile/Profile.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { leaveChat } from "../../../store/chats";
+import { clearPassChat, leaveChat } from "../../../store/chats";
 import BottomNav from "../../BottomNav/BottomNav";
 import LoadingChat from "./LoadingChat/LoadingChat";
 
@@ -16,6 +16,7 @@ function GroupChatIndex({ theme, user, socket }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(clearPassChat());
     fetch("/api/groupchats/all")
       .then((res) => res.json())
       .then((data) => {

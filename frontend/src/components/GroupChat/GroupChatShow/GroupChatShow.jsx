@@ -2,8 +2,8 @@ import "./GroupChatShow.css";
 import "./GroupChatShowBadge.css";
 import "../../Profile/Profile.css";
 
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addChat, leaveChat } from "../../../store/chats";
 import { jwtFetch } from "../../../store/jwt";
@@ -24,11 +24,19 @@ function GroupChatShow({ theme, socket }) {
   );
   const [activeUsers, setActiveUsers] = useState([]);
   const [chatLog, setChatLog] = useState([]);
+  const [chatLogo, setChatLogo] = useState(chat?.logo);
+  const [chatOwner, setChatOwner] = useState("");
+
+  const changeImage = useRef(null);
 
   const user = useSelector((state) => state.session.user);
   const chatId = useSelector((state) => state.chats?.chatId);
+  const verifyPass = useSelector((state) => state.secure_chats?.p_chatId);
   const dispatch = useDispatch();
   const { id } = useParams();
+
+  const history = useHistory();
+  if (verifyPass && verifyPass !== id) history.push("/groupchats/all");
 
   useEffect(() => {
     socket.on("message-return", () => {
@@ -45,7 +53,7 @@ function GroupChatShow({ theme, socket }) {
     }
     socket.emit("chat-join", { userId: user.username, chatroomId: id });
     dispatch(addChat(id));
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     socket.on("user-join", (payload) => {
@@ -64,7 +72,15 @@ function GroupChatShow({ theme, socket }) {
     fetch(`/api/groupchats/${id}`)
       .then((res) => res.json())
       .then((data) => setChat(data));
-  }, []);
+  }, [user]);
+
+  useEffect(() => {
+    jwtFetch(`/api/users/user/${user._id}`)
+      .then((res) => res.json())
+      .then((user) => {
+        setChatOwner(user.username);
+      });
+  }, [user._id]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -126,6 +142,44 @@ function GroupChatShow({ theme, socket }) {
     }
   };
 
+  const editGroupProfilePicture = (e) => {
+    e.preventDefault();
+    if (user._id === chat.owner) {
+      changeImage.current.click();
+    }
+  };
+
+  const fileChangeHandler = (e) => {
+    const data = new FormData();
+    data.append("image", e.target.files[0]);
+
+    if (chat.logo !== "c-logo.png") {
+      jwtFetch(`/api/groupchats/image/delete/${chat.logo}`, {
+        method: "DELETE",
+      }).then((res) => res);
+    }
+
+    jwtFetch("/api/groupchats/image/upload", {
+      method: "POST",
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        const logo = data.data.filename;
+        jwtFetch(`/api/groupchats/edit/${chatId}`, {
+          method: "PATCH",
+          body: JSON.stringify({
+            logo,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            chat.logo = logo;
+            setChatLogo(logo);
+          });
+      });
+  };
+
   return (
     <div className="groupchat-main-show" data-theme={theme}>
       <div className="groupchat-show">
@@ -136,8 +190,15 @@ function GroupChatShow({ theme, socket }) {
                 src={`http://localhost:5000/api/groupchats/image/${chat.logo}`}
                 alt="temp-pfp"
                 className="pfp-chat-top"
+                onClick={editGroupProfilePicture}
               />
             )}
+            <input
+              type="file"
+              style={{ display: "none" }}
+              ref={changeImage}
+              onChange={fileChangeHandler}
+            />
             {!chat.logo && (
               <img
                 src={require("../../../Images/c-logo.png")}
@@ -178,7 +239,7 @@ function GroupChatShow({ theme, socket }) {
             </span>
             <span id="span-owner">
               <div className="badge-group-show owner">Owner</div>
-              <p id="owner">{chat.ownerUsername}</p>
+              <p id="owner">{chatOwner}</p>
             </span>
             <span>
               <div className="badge-group-show description">Description</div>

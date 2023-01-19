@@ -24,6 +24,14 @@ const chatSchema = Schema(
       type: String,
       required: true,
     },
+    password: {
+      type: String,
+      required: false,
+    },
+    tags: {
+      type: Array,
+      required: false,
+    },
   },
   {
     timestamps: true,

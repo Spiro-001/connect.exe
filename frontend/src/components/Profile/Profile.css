@@ -192,7 +192,7 @@
     --light-text: white;
     --border-primary: white;
     --border-div: black;
-    --border-super-light: black;
+    --border-super-light: rgb(68, 68, 68);
     --description-badge: rgb(149, 56, 255);
     --title-show-badge: rgb(149, 56, 255);
     --description-show-badge: rgb(149, 56, 255);
@@ -219,7 +219,7 @@
     --send-button-color: rgb(105, 27, 156);
     --active-user-title: rgb(19, 19, 19);
     --active-user-body: rgb(19, 19, 19);
-    --session-form-background: rgb(253, 216, 181);
+    --session-form-background: rgb(147, 12, 220);
     --confirm-delete-background: white;
     --confirm-blur-background-color: rgba(0,0,0,0.6);
     --confirm-background-color: rgb(244, 177, 177);

@@ -45,10 +45,12 @@ function Profile({ theme, setTheme, socket }) {
           dispatch(
             editUser({
               currentUser: {
+                _id: user._id,
+                username,
                 email,
-                password,
               },
               editUser: {
+                _id: user._id,
                 username,
                 email,
               },

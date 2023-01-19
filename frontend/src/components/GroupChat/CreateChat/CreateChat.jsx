@@ -103,31 +103,55 @@ function CreateChat({ theme, socket }) {
     const data = new FormData();
     data.append("image", fileData);
 
-    jwtFetch("/api/groupchats/image/upload", {
-      method: "POST",
-      body: data,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        logo = data.data.filename;
-        jwtFetch("/api/groupchats/create", {
-          method: "POST",
-          body: JSON.stringify({
-            owner: user._id,
-            ownerUsername: user.username,
-            title,
-            description,
-            logo,
-          }),
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            setAllChats([...allChat, data]);
-            setTitle("");
-            setDescription("");
-            history.push(`/groupchats/${data._id}`);
-          });
-      });
+    if (fileData) {
+      jwtFetch("/api/groupchats/image/upload", {
+        method: "POST",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          logo = data.data.filename;
+          jwtFetch("/api/groupchats/create", {
+            method: "POST",
+            body: JSON.stringify({
+              owner: user._id,
+              ownerUsername: user.username,
+              title,
+              description,
+              logo,
+              password,
+              tags,
+            }),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              setAllChats([...allChat, data]);
+              setTitle("");
+              setDescription("");
+              history.push(`/groupchats/${data._id}`);
+            });
+        });
+    } else {
+      jwtFetch("/api/groupchats/create", {
+        method: "POST",
+        body: JSON.stringify({
+          owner: user._id,
+          ownerUsername: user.username,
+          title,
+          description,
+          logo: "c-logo.png",
+          password,
+          tags,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setAllChats([...allChat, data]);
+          setTitle("");
+          setDescription("");
+          history.push(`/groupchats/${data._id}`);
+        });
+    }
   };
 
   return (
@@ -197,7 +221,7 @@ function CreateChat({ theme, socket }) {
             </div>
           </div>
           <div className="top-start-chat" id="preview-img">
-            <img className="preview-photo" src={preview} alt="preview" />
+            <img className="preview-photo" src={preview} />
             <span id="span-title">
               <div className="badge-group-show title">Title</div>
               <p id="title">{title}</p>

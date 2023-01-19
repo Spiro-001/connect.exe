@@ -14,6 +14,15 @@ router.get("/", (_req, res, _next) => {
   res.json({ message: "GET /users" });
 });
 
+router.get("/user/:id", async (req, res, next) => {
+  console.log(req.params.id);
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    return res.json(user);
+  }
+});
+
 /* POST /api/users/register */
 router.post("/register", validateRegisterInput, async (req, res, next) => {
   const { email, username, password } = req.body;

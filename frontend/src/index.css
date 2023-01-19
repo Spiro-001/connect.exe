@@ -23,6 +23,7 @@ body {
   width: 100%;
   grid-template-columns: [first] 288px [second] auto [third] 288px [last];
   grid-template-rows: [first] 54px [second] auto [third] 54px [last];
+  background-color: var(--group-chat-index-background);
 }
 
 code {

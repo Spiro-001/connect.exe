@@ -44,6 +44,11 @@
     border-radius: 8px;
 }
 
+.pfp-chat-top:hover {
+    cursor: pointer;
+    filter: brightness(0.8);
+}
+
 .top-chat-box span {
     display: flex;
     position: relative;
@@ -66,6 +71,8 @@
     font-size: 16px;
     outline: none;
     width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--border-super-light);
 }
 
 .form-edit-chat-info {

@@ -27,8 +27,14 @@ router.post("/image/upload", upload.single("image"), async (req, res, next) => {
 router.get("/image/:key", (req, res, next) => {
   try {
     const key = req.params.key;
-    const readStream = getFileStream(key);
-    return readStream.pipe(res); // this line will make image readable
+
+    if (key) {
+      const readStream = getFileStream(key);
+      console.log(readStream);
+      return readStream.pipe(res); // this line will make image readable
+    } else {
+      return;
+    }
   } catch (err) {
     next(err);
   }
@@ -51,7 +57,8 @@ router.get("/", (_req, res, _next) => {
 });
 
 router.post("/create", upload.single("image"), async (req, res, next) => {
-  const { owner, ownerUsername, title, description, logo } = req.body;
+  const { owner, ownerUsername, title, description, logo, password, tags } =
+    req.body;
 
   const newChat = new Chat({
     owner,
@@ -59,6 +66,8 @@ router.post("/create", upload.single("image"), async (req, res, next) => {
     title,
     description,
     logo,
+    password,
+    tags,
   });
 
   try {
@@ -91,10 +100,12 @@ router.get("/:id", async (req, res, next) => {
 });
 
 router.patch("/edit/:id", async (req, res, next) => {
+  const { owner, ownerUsername, title, description, logo, password, tags } =
+    req.body;
   try {
     const editChat = await Chat.findByIdAndUpdate(
       { _id: req.params.id },
-      { title: req.body.title, description: req.body.description }
+      { title, description, logo }
     );
     return res.json(editChat);
   } catch (err) {

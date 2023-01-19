@@ -34,7 +34,7 @@
 
 .self-username {
     margin-right: auto;
-    padding: 4px 18px;
+    padding: 4px 14px;
     border-radius: 10px;
     font-size: 12px;
     font-weight: 600;
@@ -58,7 +58,7 @@
 
 .other-username {
     margin-left: auto;
-    padding: 4px 18px;
+    padding: 4px 14px;
     border-radius: 10px;
     font-size: 12px;
     font-weight: 600;

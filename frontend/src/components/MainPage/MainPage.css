@@ -1,0 +1,9 @@
+#chat-headline {
+    grid-row-start: 2;
+    grid-column-start: 2;
+}
+
+footer {
+    grid-row-start: 3;
+    grid-column-start: 3;
+}
