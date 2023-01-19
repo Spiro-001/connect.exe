@@ -20,7 +20,7 @@ function GroupChat({
   allChat,
   confirmDelete,
   setConfirmDelete,
-  socket,
+  SERVER,
 }) {
   const chatError = useSelector((state) => state.errors.chat);
 
@@ -77,7 +77,7 @@ function GroupChat({
         >
           <div className="top-groupchat">
             <img
-              src={`http://localhost:5000/api/groupchats/image/${chatData.logo}`}
+              src={`${SERVER}/api/groupchats/image/${chatData.logo}`}
               alt=""
               className="pfp-group-chat"
             />

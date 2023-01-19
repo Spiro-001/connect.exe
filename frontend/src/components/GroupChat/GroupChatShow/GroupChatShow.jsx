@@ -12,7 +12,7 @@ import { ReactComponent as Edit } from "./SVG/pencil-edit-button-svgrepo-com.svg
 import ActiveUsers from "./ActiveUsers/ActiveUsers";
 import ChatLog from "./ChatLog/ChatLog";
 
-function GroupChatShow({ theme, socket }) {
+function GroupChatShow({ theme, socket, SERVER }) {
   const [chat, setChat] = useState({});
   const [body, setBody] = useState("");
 
@@ -204,7 +204,7 @@ function GroupChatShow({ theme, socket }) {
           <div className="top-chat-box">
             {chat.logo && (
               <img
-                src={`http://localhost:5000/api/groupchats/image/${chat.logo}`}
+                src={`${SERVER}/api/groupchats/image/${chat.logo}`}
                 alt=""
                 className="pfp-chat-top"
                 onClick={editGroupProfilePicture}

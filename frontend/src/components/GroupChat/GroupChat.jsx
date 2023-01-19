@@ -7,17 +7,24 @@ import GroupChatShow from "./GroupChatShow/GroupChatShow";
 
 function GroupChat({ theme, socket }) {
   const user = useSelector((state) => state.session.user);
+  const SERVER = "https://teamtalk.onrender.com";
+  // const SERVER = "http://localhost:5000";
 
   return (
     <Switch>
       <ProtectedRoute exact path="/groupchats/create">
-        <CreateChat theme={theme} socket={socket} />
+        <CreateChat theme={theme} socket={socket} SERVER={SERVER} />
       </ProtectedRoute>
       <ProtectedRoute exact path="/groupchats/all">
-        <GroupChatIndex theme={theme} user={user} socket={socket} />
+        <GroupChatIndex
+          theme={theme}
+          user={user}
+          socket={socket}
+          SERVER={SERVER}
+        />
       </ProtectedRoute>
       <ProtectedRoute exact path={"/groupchats/:id"}>
-        <GroupChatShow theme={theme} socket={socket} />
+        <GroupChatShow theme={theme} socket={socket} SERVER={SERVER} />
       </ProtectedRoute>
     </Switch>
   );

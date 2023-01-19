@@ -10,7 +10,7 @@ import { useHistory } from "react-router-dom";
 import { leaveChat } from "../../../store/chats";
 import { WithContext as ReactTags } from "react-tag-input";
 
-function CreateChat({ theme, socket }) {
+function CreateChat({ theme, socket, SERVER }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [fileData, setFileData] = useState();
@@ -166,7 +166,13 @@ function CreateChat({ theme, socket }) {
           <div className="open-chats">
             {allChat?.map((chatData) => {
               if (chatData.owner === user._id) {
-                return <Chat chatData={chatData} key={chatData._id} />;
+                return (
+                  <Chat
+                    chatData={chatData}
+                    key={chatData._id}
+                    SERVER={SERVER}
+                  />
+                );
               }
             })}
           </div>

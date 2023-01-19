@@ -7,7 +7,7 @@ import { clearPassChat, leaveChat } from "../../../store/chats";
 import BottomNav from "../../BottomNav/BottomNav";
 import LoadingChat from "./LoadingChat/LoadingChat";
 
-function GroupChatIndex({ theme, user, socket }) {
+function GroupChatIndex({ theme, user, socket, SERVER }) {
   const [allChat, setAllChats] = useState([]);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -50,6 +50,7 @@ function GroupChatIndex({ theme, user, socket }) {
                     confirmDelete={confirmDelete}
                     setConfirmDelete={setConfirmDelete}
                     socket={socket}
+                    SERVER={SERVER}
                   />
                 );
               } else {
@@ -66,6 +67,7 @@ function GroupChatIndex({ theme, user, socket }) {
                       confirmDelete={confirmDelete}
                       setConfirmDelete={setConfirmDelete}
                       socket={socket}
+                      SERVER={SERVER}
                     />
                   );
                 }
