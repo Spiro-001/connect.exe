@@ -39,18 +39,37 @@ function GroupChatIndex({ theme, user, socket }) {
             <h1 id="no-chats">No chats available, create one now!</h1>
           ) : (
             allChat.map((chatData) => {
-              return (
-                <GroupChat
-                  chatData={chatData}
-                  key={chatData._id}
-                  user={user}
-                  setAllChats={setAllChats}
-                  allChat={allChat}
-                  confirmDelete={confirmDelete}
-                  setConfirmDelete={setConfirmDelete}
-                  socket={socket}
-                />
-              );
+              if (chatData.owner === user._id) {
+                return (
+                  <GroupChat
+                    chatData={chatData}
+                    key={chatData._id}
+                    user={user}
+                    setAllChats={setAllChats}
+                    allChat={allChat}
+                    confirmDelete={confirmDelete}
+                    setConfirmDelete={setConfirmDelete}
+                    socket={socket}
+                  />
+                );
+              } else {
+                if (!chatData.visible) {
+                  return null;
+                } else {
+                  return (
+                    <GroupChat
+                      chatData={chatData}
+                      key={chatData._id}
+                      user={user}
+                      setAllChats={setAllChats}
+                      allChat={allChat}
+                      confirmDelete={confirmDelete}
+                      setConfirmDelete={setConfirmDelete}
+                      socket={socket}
+                    />
+                  );
+                }
+              }
             })
           )}
         </div>

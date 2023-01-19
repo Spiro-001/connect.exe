@@ -32,6 +32,10 @@ const chatSchema = Schema(
       type: Array,
       required: false,
     },
+    visible: {
+      type: Boolean,
+      required: true,
+    },
   },
   {
     timestamps: true,

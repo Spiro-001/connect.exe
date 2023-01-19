@@ -16,6 +16,7 @@ function CreateChat({ theme, socket }) {
   const [fileData, setFileData] = useState();
   const [password, setPassword] = useState("");
   const [tags, setTags] = useState([]);
+  const [visible, setVisible] = useState(true);
   const [preview, setPreview] = useState();
 
   const [openLeftMenu, setOpenLeftMenu] = useState(0);
@@ -99,6 +100,7 @@ function CreateChat({ theme, socket }) {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+
     let logo;
     const data = new FormData();
     data.append("image", fileData);
@@ -121,6 +123,7 @@ function CreateChat({ theme, socket }) {
               logo,
               password,
               tags,
+              visible: visible === "true" ? true : false,
             }),
           })
             .then((res) => res.json())
@@ -142,6 +145,7 @@ function CreateChat({ theme, socket }) {
           logo: "c-logo.png",
           password,
           tags,
+          visible: visible === "true" ? true : false,
         }),
       })
         .then((res) => res.json())
@@ -234,6 +238,11 @@ function CreateChat({ theme, socket }) {
               <div className="badge-group-show description">Description</div>
               <p id="description">{description}</p>
             </span>
+            <input
+              type="checkbox"
+              value={visible}
+              onChange={(e) => setVisible(e.target.value)}
+            />
           </div>
           <div className="main-start-chat">Start a new chat!</div>
           <div className="bottom-start-chat">

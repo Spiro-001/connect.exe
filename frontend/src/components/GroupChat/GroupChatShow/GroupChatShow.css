@@ -183,7 +183,7 @@
 #is-typing {
     color: var(--text-primary);
     position: absolute;
-    bottom: 98px;
+    top: -4px;
     right: 108px;
     z-index: 1;
     font-size: 12px;

@@ -57,8 +57,18 @@ router.get("/", (_req, res, _next) => {
 });
 
 router.post("/create", upload.single("image"), async (req, res, next) => {
-  const { owner, ownerUsername, title, description, logo, password, tags } =
-    req.body;
+  const {
+    owner,
+    ownerUsername,
+    title,
+    description,
+    logo,
+    password,
+    tags,
+    visible,
+  } = req.body;
+
+  console.log(visible);
 
   const newChat = new Chat({
     owner,
@@ -68,6 +78,7 @@ router.post("/create", upload.single("image"), async (req, res, next) => {
     logo,
     password,
     tags,
+    visible,
   });
 
   try {

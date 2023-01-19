@@ -205,7 +205,7 @@ function GroupChatShow({ theme, socket }) {
             {chat.logo && (
               <img
                 src={`http://localhost:5000/api/groupchats/image/${chat.logo}`}
-                alt="temp-pfp"
+                alt=""
                 className="pfp-chat-top"
                 onClick={editGroupProfilePicture}
               />
@@ -219,7 +219,7 @@ function GroupChatShow({ theme, socket }) {
             {!chat.logo && (
               <img
                 src={require("../../../Images/c-logo.png")}
-                alt="temp-pfp"
+                alt=""
                 className="pfp-chat-top"
               />
             )}
@@ -301,12 +301,12 @@ function GroupChatShow({ theme, socket }) {
             setNameofTyperArray={setNameofTyperArray}
             nameOfTyperArray={nameOfTyperArray}
           />
-          {nameOfTyperArray.map((name) => {
-            return (
-              <span id="is-typing">{name ? name + " is typing..." : ""}</span>
-            );
-          })}
           <form className="bottom-chat-box" onSubmit={handleOnSubmit}>
+            {nameOfTyperArray.map((name) => {
+              return (
+                <span id="is-typing">{name ? name + " is typing..." : ""}</span>
+              );
+            })}
             <input
               onBlur={userStopTyping}
               value={body}

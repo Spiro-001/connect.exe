@@ -78,7 +78,7 @@ function GroupChat({
           <div className="top-groupchat">
             <img
               src={`http://localhost:5000/api/groupchats/image/${chatData.logo}`}
-              alt="temp-pfp"
+              alt=""
               className="pfp-group-chat"
             />
             <div className="group-chat-name">{chatData.title}</div>
