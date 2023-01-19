@@ -27,6 +27,7 @@ function GroupChatShow({ theme, socket }) {
   const [chatLogo, setChatLogo] = useState(chat?.logo);
   const [chatOwner, setChatOwner] = useState("");
   const [userTyping, setUserTyping] = useState(false);
+  const [nameOfTyperArray, setNameofTyperArray] = useState([]);
 
   const changeImage = useRef(null);
 
@@ -194,6 +195,8 @@ function GroupChatShow({ theme, socket }) {
     });
   };
 
+  useEffect(() => {}, [nameOfTyperArray]);
+
   return (
     <div className="groupchat-main-show" data-theme={theme}>
       <div className="groupchat-show">
@@ -295,7 +298,14 @@ function GroupChatShow({ theme, socket }) {
             socket={socket}
             userTyping={userTyping}
             userState={user}
+            setNameofTyperArray={setNameofTyperArray}
+            nameOfTyperArray={nameOfTyperArray}
           />
+          {nameOfTyperArray.map((name) => {
+            return (
+              <span id="is-typing">{name ? name + " is typing..." : ""}</span>
+            );
+          })}
           <form className="bottom-chat-box" onSubmit={handleOnSubmit}>
             <input
               onBlur={userStopTyping}

@@ -4,13 +4,21 @@ import { jwtFetch } from "../../../../store/jwt";
 
 import "./ChatBubble.css";
 
-function ChatLog({ userId, chatLog, socket, userTyping, userState }) {
+function ChatLog({
+  userId,
+  chatLog,
+  socket,
+  userTyping,
+  userState,
+  setNameofTyperArray,
+  nameOfTyperArray,
+}) {
   let previousAuthor = [];
   const uniqueAuthor = useRef([]);
   const chatWindow = useRef(null);
   const messages = useRef({});
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(1);
   const [otherTyping, setOtherTyping] = useState(false);
 
   useEffect(() => {
@@ -24,13 +32,16 @@ function ChatLog({ userId, chatLog, socket, userTyping, userState }) {
 
   useEffect(() => {
     socket.on("other-typing", (user) => {
-      console.log(userState.username, user.user);
+      if (user.user) {
+        setNameofTyperArray([...nameOfTyperArray, user.user]);
+      }
       if (userState.username !== user.user) {
         setOtherTyping(true);
       }
     });
 
     socket.on("other-stop-typing", (user) => {
+      setNameofTyperArray([...nameOfTyperArray, user.user]);
       if (userState.username !== user.user) {
         setOtherTyping(false);
       }
@@ -49,7 +60,9 @@ function ChatLog({ userId, chatLog, socket, userTyping, userState }) {
           .then((res) => res.json())
           .then((user) => {
             messages.current[user._id] = user.username;
-            setLoading(true);
+            if (loading <= 2) {
+              setLoading(loading + 1);
+            }
           });
       });
     }
@@ -57,7 +70,7 @@ function ChatLog({ userId, chatLog, socket, userTyping, userState }) {
 
   return (
     <div className="middle-main-chat-show" ref={chatWindow}>
-      {loading && (
+      {loading === 3 && (
         <>
           {chatLog?.map((message) => {
             previousAuthor.push(message.author);
@@ -79,9 +92,7 @@ function ChatLog({ userId, chatLog, socket, userTyping, userState }) {
                   {previousAuthor[previousAuthor.length - 2] !==
                     message.author && (
                     <span className="other-username">
-                      {messages.current.hasOwnProperty(message.author)
-                        ? messages.current[message.author]
-                        : "loading"}
+                      {messages.current[message.author]}
                     </span>
                   )}
                   <span className="other">{message.body}</span>
