@@ -7,8 +7,8 @@ import GroupChatShow from "./GroupChatShow/GroupChatShow";
 
 function GroupChat({ theme, socket }) {
   const user = useSelector((state) => state.session.user);
-  const SERVER = "https://teamtalk.onrender.com";
-  // const SERVER = "http://localhost:5000";
+  // const SERVER = "https://teamtalk.onrender.com";
+  const SERVER = "";
 
   return (
     <Switch>
