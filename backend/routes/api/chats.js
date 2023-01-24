@@ -30,6 +30,7 @@ router.get("/image/:key", (req, res, next) => {
 
     if (key) {
       const readStream = getFileStream(key);
+      console.log(readStream);
       return readStream.pipe(res); // this line will make image readable
     } else {
       return;
