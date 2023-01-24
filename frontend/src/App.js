@@ -32,10 +32,7 @@ export function App() {
 
   useEffect(() => {
     if (!loaded) {
-      console.log(loaded);
-      socket.on("connect", () => {
-        console.log(socket.id);
-      });
+      socket.on("connect", () => {});
 
       socket.on("disconnected", () => {
         socket.emit("test-disconnect");

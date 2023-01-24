@@ -41,7 +41,6 @@ function ChatLog({
     });
 
     socket.on("other-stop-typing", (user) => {
-      console.log("STOP");
       setNameofTyperArray([]);
       if (userState.username !== user.user) {
         setOtherTyping(false);

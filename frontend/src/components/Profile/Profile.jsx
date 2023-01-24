@@ -32,7 +32,6 @@ function Profile({ theme, setTheme, socket }) {
   };
 
   const handleOnSubmitEdit = (e) => {
-    console.log(password);
     if (password.length === 0) {
       setOpenEdit("none");
     } else {

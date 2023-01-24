@@ -30,7 +30,6 @@ router.get("/image/:key", (req, res, next) => {
 
     if (key) {
       const readStream = getFileStream(key);
-      console.log(readStream);
       return readStream.pipe(res); // this line will make image readable
     } else {
       return;
@@ -67,8 +66,6 @@ router.post("/create", upload.single("image"), async (req, res, next) => {
     tags,
     visible,
   } = req.body;
-
-  console.log(visible);
 
   const newChat = new Chat({
     owner,

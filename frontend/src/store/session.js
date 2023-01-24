@@ -48,7 +48,6 @@ const startSession = (userInfo, route) => async (dispatch) => {
 };
 
 export const editUser = (payload) => async (dispatch) => {
-  console.log(payload);
   try {
     const res = await jwtFetch("/api/users/edit", {
       method: "PATCH",
