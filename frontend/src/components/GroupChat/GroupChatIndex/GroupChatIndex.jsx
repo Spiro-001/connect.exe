@@ -27,7 +27,10 @@ function GroupChatIndex({ theme, user, socket, SERVER }) {
 
   useEffect(() => {
     socket.emit("chat-leave", { userId: user.username, chatroomId: chatId });
-    dispatch(leaveChat());
+    if (chatId) {
+      console.log(chatId);
+      dispatch(leaveChat());
+    }
   }, []);
 
   return (
